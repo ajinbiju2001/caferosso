@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Cafe Rosso Origin | Digital Menu & Order</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Tailwind CSS v3 CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts for typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,500&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rossoRed: '#c8102e',
+            rossoDark: '#1a1a1a',
+            rossoCharcoal: '#333333',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Oswald', 'sans-serif'],
+            script: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .hero-heading {
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .price-tag {
+      color: #c8102e;
+      font-weight: 700;
+    }
+    .card-shadow {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .sticky-nav {
+      background: rgba(26, 26, 26, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .section-divider {
+      position: relative;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .section-divider::before, .section-divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 35%;
+      height: 1px;
+      background: #e5e7eb;
+    }
+    .section-divider::before { left: 0; }
+    .section-divider::after { right: 0; }
+    
+    /* Hide scrollbars but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* Custom Smooth Animations */
+    .cart-drawer {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-in-item {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 overflow-x-hidden">
+
+  <!-- BEGIN: MainHeader -->
+  <header class="fixed top-0 left-0 right-0 z-40 sticky-nav text-white px-4 md:px-6 py-3 transition-all duration-300">
+    <div class="max-w-7xl mx-auto grid grid-cols-3 items-center">
+      <div class="flex items-center gap-3 justify-start">
+        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden shadow-lg">
+          <img src="logo.png" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
+        </div>
+        <div>
+          <span class="font-display text-lg tracking-wider font-bold block leading-none">CAFE ROSSO</span>
+          <span class="font-script text-xs text-yellow-500 italic">Origin</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex justify-center text-xs font-semibold uppercase tracking-wider">
+        <a class="text-rossoRed border-b-2 border-rossoRed pb-1 transition-colors" href="#menu-sections">Menu</a>
+      </nav>
+      <div class="flex items-center gap-3 justify-end">
+        <!-- Floating Cart Indicator Trigger -->
+        <button onclick="toggleCart(true)" id="header-cart-btn" class="relative bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all">
+          <span class="material-symbols-outlined block text-white text-xl">shopping_cart</span>
+          <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-rossoRed text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold hidden scale-0 transition-all duration-300">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- END: MainHeader -->
+
+  <!-- BEGIN: HeroSection -->
+  <section class="relative h-[550px] md:h-[600px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-black/60 z-10"></div>
+      <img alt="Hero Background" class="w-full h-full object-cover animate-[scaleUp_20s_infinite_alternate]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL0z64M61sD3jDt0YD_Pi5g55CK5acfoNZPMZk3hea94XgGpQn-s1AolBl7SoKh7fYi0_p6sWoREvniKG202_t9ogQxZClr2GkHw64QOwwj8h6PTy1OxrdKYm1rVYNEOjl2G_QtQNWTfngsLsersIdQu57jUXHDf0I35kD-4HMLOlNpQxl9WNKjL96Wh-rS4cNJQ0H7FipnNs5AqpKQeCl-9YpH08CS9sjaKN4QnDJoqfoq63IxKaNQtTMSCbgUTP6PtcD3W28a_c">
+    </div>
+    <div class="relative z-20 text-center text-white space-y-4 px-4">
+      <p class="font-script text-3xl md:text-4xl text-yellow-500 italic mb-2">Welcome to</p>
+      <h1 class="font-display text-6xl md:text-9xl leading-none hero-heading tracking-widest">CAFE ROSSO</h1>
+      <h2 class="font-script text-3xl md:text-5xl text-rossoRed italic mt-2">Origin</h2>
+      <div class="flex items-center justify-center gap-4 mt-8 md:mt-12">
+        <span class="h-px w-8 md:w-12 bg-white/50"></span>
+        <p class="uppercase tracking-[0.3em] text-xs md:text-base font-light">Good Food. Great Mood.</p>
+        <span class="h-px w-8 md:w-12 bg-white/50"></span>
+      </div>
+    </div>
+  </section>
+  <!-- END: HeroSection -->
+
+  <!-- BEGIN: SearchAndFilters -->
+  <section id="menu-sections" class="max-w-4xl mx-auto -mt-8 relative z-30 px-4">
+    <!-- Search Bar -->
+    <div class="bg-white rounded-xl shadow-xl p-1.5 flex items-center border border-gray-100 focus-within:border-rossoRed/30 transition-all">
+      <span class="material-symbols-outlined text-gray-400 pl-3">search</span>
+      <input id="menu-search-input" class="w-full border-none focus:ring-0 text-gray-700 px-3 py-3 text-sm md:text-base placeholder-gray-400 outline-none" placeholder="Search delicious starters, mains, desserts..." type="text">
+      <button onclick="clearSearch()" id="clear-search-btn" class="p-2 text-gray-400 hover:text-rossoRed hidden">
+        <span class="material-symbols-outlined block text-lg">close</span>
+      </button>
+    </div>
+
+    <!-- Category Filter Slider -->
+    <div class="flex overflow-x-auto gap-4 md:gap-6 py-6 md:py-8 no-scrollbar scroll-smooth items-center text-xs font-semibold uppercase tracking-wider" id="category-slider">
+      <!-- Generated Dynamically -->
+    </div>
+  </section>
+  <!-- END: SearchAndFilters -->
+
+  <!-- BEGIN: Menu Display -->
+  <main class="max-w-7xl mx-auto px-4 pb-24" id="menu-container">
+    <!-- Grid containers generated dynamically to handle searching and category highlights correctly -->
+  </main>
+  <!-- END: Menu Display -->
+
+  <!-- BEGIN: MainFooter -->
+  <footer id="about-footer" class="bg-rossoDark text-white pt-16 pb-8 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12 border-b border-white/10 pb-12 items-center">
+        <!-- Contact -->
+        <div class="flex gap-4 items-center justify-start">
+          <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+            <span class="material-symbols-outlined">call</span>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 uppercase tracking-widest">Call Us</p>
+            <a href="tel:+919645227772" class="font-bold text-sm hover:text-rossoRed transition-colors">+91 96452 27772</a>
+          </div>
+        </div>
+        <!-- Opening Hours -->
+        <div class="flex gap-4 items-center justify-start">
+          <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+            <span class="material-symbols-outlined">schedule</span>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 uppercase tracking-widest">Opening Hours</p>
+            <p class="font-bold text-sm">Mon - Sun<br>11:00 AM - 11:00 PM</p>
+          </div>
+        </div>
+        <!-- Central Logo -->
+        <div class="flex justify-center md:order-none -order-1">
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg">
+            <img src="logo.png" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
+          </div>
+        </div>
+        <!-- Location -->
+        <div class="flex gap-4 items-center justify-start">
+          <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+            <span class="material-symbols-outlined">pin_drop</span>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 uppercase tracking-widest">Our Location</p>
+            <p class="font-bold text-sm">55/413-1, 4th Cross Rd, Ramaswamy colony,<br>Panampilly Nagar, Kochi, Kerala 682036</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-4 text-xs text-gray-500 uppercase tracking-widest">
+        <p class="">© 2026 Cafe Rosso Origin. All Rights Reserved.</p>
+        <!-- Social Icons -->
+        <div class="flex gap-4">
+          <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+          </a>
+          <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+          </a>
+          <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+          </a>
+        </div>
+        <p class="">Designed with <span class="text-rossoRed">♥</span> for great food lovers.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- END: MainFooter -->
+
+  <!-- BEGIN: Sliding Cart Drawer -->
+  <div id="cart-backdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <div id="cart-drawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl cart-drawer translate-x-full flex flex-col">
+    <!-- Cart Header -->
+    <div class="p-4 border-b flex justify-between items-center bg-rossoDark text-white">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-rossoRed">shopping_basket</span>
+        <h3 class="font-display tracking-widest text-lg">YOUR ORDER</h3>
+      </div>
+      <button onclick="toggleCart(false)" class="p-1 hover:bg-white/10 rounded-full transition-colors">
+        <span class="material-symbols-outlined block">close</span>
+      </button>
+    </div>
+    <!-- Cart Items List -->
+    <div id="cart-items-container" class="flex-grow overflow-y-auto p-4 space-y-4">
+      <!-- Rendered dynamically -->
+      <div class="text-center py-12 text-gray-400">
+        <span class="material-symbols-outlined text-5xl mb-2">restaurant</span>
+        <p class="text-sm">Your order is empty.</p>
+        <p class="text-xs mt-1">Add items from the menu to get started!</p>
+      </div>
+    </div>
+    <!-- Cart Footer / Total -->
+    <div class="p-4 border-t bg-gray-50 space-y-4">
+      <div class="flex justify-between items-center text-gray-800">
+        <span class="text-sm font-medium">Subtotal</span>
+        <span id="cart-subtotal" class="font-bold text-lg">₹0</span>
+      </div>
+      <p class="text-[11px] text-gray-500 leading-normal">
+        Orders will be sent directly to our restaurant via WhatsApp. We will confirm your delivery/pickup details immediately.
+      </p>
+      <button id="whatsapp-checkout-btn" class="w-full bg-rossoRed hover:bg-red-700 text-white py-3 rounded-full flex items-center justify-center gap-2 font-bold transition-all shadow-lg text-sm uppercase tracking-wider">
+        <svg fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.898 7.898 0 0 0-2.327-5.607zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
+        </svg>
+        Confirm Order via WhatsApp
+      </button>
+    </div>
+  </div>
+  <!-- END: Sliding Cart Drawer -->
+
+  <!-- BEGIN: Floating Action Button (FAB) Cart -->
+  <button id="floating-cart-fab" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-rossoRed text-white p-4 rounded-full shadow-2xl flex items-center justify-center gap-2 hover:bg-red-700 transition-all duration-300 translate-y-24 scale-0">
+    <span class="material-symbols-outlined block text-2xl">shopping_cart</span>
+    <span id="fab-cart-count" class="bg-white text-rossoRed text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
+  </button>
+  <!-- END: Floating Action Button (FAB) Cart -->
+
+  <!-- Scripts -->
+  <script>
+    // Menu database
+    const CATEGORIES = [
+      { id: 'starters', name: 'Starters', icon: 'restaurant_menu', isGrid: true },
+      { id: 'soups', name: 'Soups', icon: 'soup_kitchen', isGrid: true },
+      { id: 'main_course', name: 'Main Course', icon: 'dinner_dining', isGrid: false }, // Carousel
+      { id: 'biryani', name: 'Biryani', icon: 'rice_bowl', isGrid: true },
+      { id: 'chinese', name: 'Chinese', icon: 'ramen_dining', isGrid: true },
+      { id: 'beverages', name: 'Beverages', icon: 'local_bar', isGrid: true },
+      { id: 'desserts', name: 'Desserts', icon: 'icecream', isGrid: true },
+      { id: 'juices_shakes', name: 'Juices & Shakes', icon: 'local_cafe', isGrid: true }
+    ];
+
+    const MENU_DATA = {
+      starters: [
+        { id: 's1', name: 'Crispy Chicken Wings', description: 'Crispy fried chicken wings tossed in our signature sauce.', price: 299, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpxOWMZVlTxA9LGkVfPccreJdXErS0RkSWm0dOJHGJGJUsRr8Kw33ytxzxjTX1-VD1mSURAfe6RyCO5jrlJ8t1YWtHjqPbkTiQNTCNax6p6RzI2zCd1kBkOZsYbcsfwpTr-fQj-ibj5dc5p7vUPwj7iXSdynmhCn3K0-g6cA1Jww8ABH_7zy88wrtPLEmWUkWmKMTdO3lleY6024azaNWqJC8Cd1UNWoVo3dDbz0Znig1aHRZdDk9c3VT1cOdpXj2SCqPwG7p2JTw', bestseller: true },
+        { id: 's2', name: 'Peri Peri French Fries', description: 'Crispy fries tossed in peri peri spice and herbs.', price: 199, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDlelv49faIL9gSZXACS2HyY-tcblN3VwjjZ1hhHgwoGDpsPG4aMcw-lpesWR607sYRvuDW4ZrIN6Z1Uw2-o4r4eKHIfMPCK4OloSpUyghJtNaTq-cGfm5TvvQERMcuYfnHbDdO8iDefC1tIazPRj6cD5K25CEG13oxK0eczzLWqG-fenS5JOutf98IxE8JAlivbeeFZQQKqu5BJDy9LzzOyk7WP_0JepsHC9VG4F0zmIff0zv8rq--oayX2o8_OAkyBAmnl1GYe90', bestseller: false },
+        { id: 's3', name: 'Chicken Tikka', description: 'Classic chicken tikka marinated in yogurt and spices.', price: 349, image: 'chicken_tikka.png', bestseller: true },
+        { id: 's4', name: 'Paneer Tikka', description: 'Cottage cheese cubes marinated in spices and grilled to perfection.', price: 299, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAU5TvgTmIF-uyVumN7eHDbApj6BNEfyst2YD6E0uBgUexyCUUlDQH2nBB6hmUGuUV7uilRa668pTGduPwwj6N20wH30ZrN9UClyYDQ9OYG-xQib_VMIQHdJmdafY7e6TT7Fo4bEGDK4A-SfOoOaZRNwRdwfzVysxSQDQhSVQI8ARNLK3t71bA0MZiGRLZ3zGa_hzvNuadW6fC67XsT5Rr9MnZQ2_Az8lqt6HbagJbt_b5XnbukcttpsAhVVGk3rl3NPrV6N34pizg', bestseller: false },
+        { id: 's5', name: 'Loaded Nachos', description: 'Nachos topped with cheese sauce, salsa, jalapeños & beans.', price: 249, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDD9WQH8xEjTZ6gAVTxlLv9AnwS1Zegs0P5Z96TrXTagHnpAfRnrf1yTaqS5gEco-8U-fej03Odm7PYWdMH70KHmkqKdenQ9ldUX4yKAPRXVTNorJAaGDV2CNNEw5pxsFt6sdPJx4npZTk5TaGb_jIw7PxQjyMibKIRyvBxN3e0_PsXZTKp7dldDVR0a5E8668uZ2O9OG1nSgT5-2aoM0QAaR2smildeSUGiGSBY_KeQgslMc2CnonHbkETtxekE58vk0TvcYhn8l8', bestseller: false },
+        { id: 's6', name: 'Veg Spring Rolls', description: 'Crispy veg rolls served with schezwan dipping sauce.', price: 199, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDDTiWeS2JchtDh8cUk8scASCr_8XXoAfwajgUM--W8veBVojWEOmpdBfNSacoKY08q7y8wAYrNzJL15gL2UjFc3lTKKT3lALe9n7C2NSjOa339KZraYRD37q68cWeI1VrGRseYvjp8sQXsi_m2Zb8pyssUCd194br0JJrJ4XlRL5qFMsgCjrHDYhNVLinEHndMpXqRGYYxPnFWDs56dr800_Zbjopvx78dEtC-SMnzDX5PuFFYuhdMQJV3erw5NUuw92TRdWlZ25U', bestseller: false },
+        { id: 's7', name: 'Burrata with Heirloom Tomatoes', description: 'Creamy burrata cheese, vibrant heirloom tomatoes, aged balsamic glaze, and fresh basil pearls.', price: 425, image: 'https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&q=80&w=400', bestseller: true },
+        { id: 's8', name: 'Truffle Arancini', description: 'Crispy risotto balls infused with black truffle and mozzarella, served with a roasted garlic aioli.', price: 389, image: 'https://images.unsplash.com/photo-1633436374961-09b92742047b?auto=format&fit=crop&q=80&w=400', bestseller: false },
+        { id: 's9', name: 'Garlic Butter Prawns', description: 'Succulent prawns sautéed in a rich garlic herb butter with a hint of lemon and chili flakes.', price: 549, image: 'https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      ],
+      soups: [
+        { id: 'sp1', name: 'Tomato Basil Soup', description: 'Rich tomato soup infused with fresh basil and roasted garlic, served with herb croutons.', price: 179, image: 'tomato_soup.png', bestseller: false },
+        { id: 'sp2', name: 'Hot & Sour Chicken Soup', description: 'Spicy and tangy soup with chicken slices, wood-ear mushrooms, and bamboo shoots.', price: 199, image: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&q=80&w=400', bestseller: true }
+      ],
+      main_course: [
+        { id: 'm1', name: 'Butter Chicken', description: 'Tender chicken cooked in rich buttery tomato and cashew gravy.', price: 399, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAwH8543phWWyu45dMG60jGtkJqvqCdHRtNfMY2oReAJlxNfr1-0XuAleB6EoBAL6QGr5gHrPT1VVYiq9oTFm2fP_mR4KmhXN6i5VvXBr3R2PlAzvKFjS8cM3BsLT6pkO_m7m-dWhVAM0M97i9K8iW5eT5uYrVsfmCqF_AHx2EbFKxlyhunya1AMACh249ZXCQtNiaePFnPfGKh0p1foRjl1lgX1I1nMsBA7nXW54wxNyB9QGKjilsvdYr22-MjOxlY6IHYwfr8Pek', bestseller: true },
+        { id: 'm2', name: 'Paneer Butter Masala', description: 'Cottage cheese cooked in creamy tomato and butter gravy.', price: 349, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuADkqNipsBLOFsa81ByeJP_KJobYgZhVmt656Os7E2-sS8bqAw-crw3Oh1TZ6TDRfIToKv6RFgmuhwWv-HU6Og3XkDnGsRxLoBwPrd2OVn3sdwQ8D7nmc15Wt730OrCif6CQXMkVmhrPJ0zDU5uHRXsEWxXTib9Ig07QQDLx0r_7JrAbbhw7UM3eEB87Osl_HgB0CMDzrzxXvMkdz2Zch6V6Nze_PYVgNp88OTav4oinP7LxDYH07YVprmiH7LDLzv_uvcypg8JzTg', bestseller: false },
+        { id: 'm3', name: 'Thai Green Curry (Veg)', description: 'Exotic Thai curry with broccoli, babycorn, and bell peppers in green curry sauce.', price: 329, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBsjoXL5tJnszoMeA1Oojqxi9Nga0stHM7-j8Iqj8fGGdAqT5M034emfNix4RWbxH7z_t2KnZY3viIRKnX7Id43-U-yb65Zj4tiYh7moPgt5d6sND-utnUD4Rn8gJb80otyia0WNEZH-lorBXMTP0VvgNYyXAVXvp03ts4R_ancfGLM7Vj-BiHfOilzLKJ7vktYM3-zgTIf3z9ZNiJ-OvEm2eGVZDeJ0FPJjI6p862oaZ7aXxAtseUzwBz2XdOZGPv_3PtqCJ4PPE8', bestseller: false },
+        { id: 'm4', name: 'Dal Makhani', description: 'Slow cooked black lentils in creamy buttery tomato gravy.', price: 279, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAF2GFAIBS4o8Dhhz8ctZMH21zEWk6UYp3t_UFGpCHz5gnMdDwrtRRPvkAl6FsbO7uSYktNdHglpn_pCQFh_Se43-627BCr9eKhZpk9DGTCjdUFrjGdfG2wLWXgSTlSbQb4Z74R8QN5Oi7pDPKhCMS_8yfVDLjzFdzifmxACMGf5uBisi4dWpOe1WBZX00r9gig6aenu1OpWZmzNWPCG2gSlDyqFsXC7rb8IGBm3Fsz6u78PjwlcH_3ey444ZaKYjzM59iLvkZTuzo', bestseller: false }
+      ],
+      biryani: [
+        { id: 'b1', name: 'Hyderabadi Chicken Biryani', description: 'Fragrant basmati rice layered with juicy chicken, spices, and saffron.', price: 379, image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=400', bestseller: true },
+        { id: 'b2', name: 'Nizami Veg Biryani', description: 'Traditional slow-cooked vegetable biryani served with mirchi ka salan.', price: 299, image: 'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      ],
+      chinese: [
+        { id: 'c1', name: 'Schezwan Noodles', description: 'Fiery stir-fried noodles tossed with fresh veggies and bold Schezwan sauce.', price: 249, image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&q=80&w=400', bestseller: false },
+        { id: 'c2', name: 'Chilli Chicken', description: 'Crispy chicken chunks tossed in a sweet, spicy, and tangy chilli sauce.', price: 299, image: 'https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&q=80&w=400', bestseller: true }
+      ],
+      beverages: [
+        { id: 'bev1', name: 'Iced Latte', description: 'Double shot of espresso poured over ice and fresh milk.', price: 169, image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=400', bestseller: false },
+        { id: 'bev2', name: 'Mint Mojito', description: 'Refreshing blend of lime, fresh mint leaves, sugar, and club soda.', price: 149, image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      ],
+      desserts: [
+        { id: 'd1', name: 'Sizzling Brownie', description: 'Warm chocolate brownie served on a sizzler plate with vanilla ice cream and hot fudge.', price: 249, image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=400', bestseller: true },
+        { id: 'd2', name: 'Tiramisu Rosso', description: 'Classic Italian dessert with espresso-soaked ladyfingers and mascarpone cream.', price: 299, image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      ],
+      juices_shakes: [
+        { id: 'j1', name: 'Fresh Watermelon Juice', description: 'Cold-pressed local watermelons with a hint of mint.', price: 189, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDe7FJLpwobZ04Z31oc6hT4Dlj7LnTN3z0Jt4KKyPC3zTECEOrXo8InU-etF133FbQA91EGB0E27j85hUNQfRkVhz7TX6ZwjpQ5DlyxPiBaJ3HoJePHJSCat7No2N2iSx83ejk6lhbJAjCLm0kb-3l6u2Ph50jjcV_f-3-M-PYb3VQIEahfg6ndd5R8LjhZDNZaSbnbpMpRX6lENQgFFTR4-l_lvWUsBOzkxVsLCX3CfdyqJQMWKL7_ODlFUKuRA3OKEk6bg_t3eDY', bestseller: false },
+        { id: 'j2', name: 'Classic Chocolate Shake', description: 'Rich Belgian chocolate blended with creamy vanilla gelato.', price: 249, image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=400', bestseller: false },
+        { id: 'j3', name: 'Alphonso Mango Smoothie', description: 'Seasonal premium mangoes blended with Greek yogurt.', price: 229, image: 'mango_smoothie.png', bestseller: false },
+        { id: 'j4', name: 'Strawberry Bliss Shake', description: 'Fresh garden strawberries with whipped cream and white chocolate shavings.', price: 269, image: 'https://images.unsplash.com/photo-1553174241-0b28d763cafa?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      ]
+    };
+
+    // State
+    let cart = {};
+    let currentCategory = 'starters';
+    let searchQuery = '';
+
+    // Elements
+    const categorySlider = document.getElementById('category-slider');
+    const menuContainer = document.getElementById('menu-container');
+    const menuSearchInput = document.getElementById('menu-search-input');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartBackdrop = document.getElementById('cart-backdrop');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartSubtotal = document.getElementById('cart-subtotal');
+    const whatsappCheckoutBtn = document.getElementById('whatsapp-checkout-btn');
+    const cartCountBadge = document.getElementById('cart-count-badge');
+    const floatingCartFab = document.getElementById('floating-cart-fab');
+    const fabCartCount = document.getElementById('fab-cart-count');
+
+    // Initialize UI
+    function init() {
+      renderCategories();
+      renderMenu();
+      setupSearch();
+      setupCartCheckout();
+      updateCartUI();
+    }
+
+    // Render category selectors
+    function renderCategories() {
+      categorySlider.innerHTML = CATEGORIES.map((cat, index) => {
+        const isActive = cat.id === currentCategory;
+        const activeClass = isActive 
+          ? 'text-rossoRed' 
+          : 'text-gray-400 hover:text-rossoRed';
+        const buttonBg = isActive 
+          ? 'bg-rossoRed text-white shadow-lg scale-105' 
+          : 'bg-white border border-gray-100 shadow-sm text-gray-500';
+
+        return `
+          <button onclick="selectCategory('${cat.id}')" id="cat-btn-${cat.id}" class="flex flex-col items-center gap-2 min-w-fit transition-all duration-300 group ${activeClass}">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${buttonBg}">
+              <span class="material-symbols-outlined block text-2xl">${cat.icon}</span>
+            </div>
+            <span class="text-[11px] font-bold">${cat.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectCategory(catId) {
+      currentCategory = catId;
+      renderCategories();
+      
+      // Clear search so they can browse the full category
+      if (searchQuery) {
+        menuSearchInput.value = '';
+        searchQuery = '';
+        clearSearchBtn.classList.add('hidden');
+      }
+      
+      renderMenu();
+
+      // Smooth scroll to the menu section
+      const targetElement = document.getElementById(`section-${catId}`);
+      if (targetElement) {
+        const offset = 120; // sticky header + category bar height approximate
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = targetElement.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Render the complete menu based on current filter / query
+    function renderMenu() {
+      let html = '';
+
+      CATEGORIES.forEach(category => {
+        const items = MENU_DATA[category.id] || [];
+        // Filter items if searching
+        const filteredItems = items.filter(item => 
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+        // If searching and this category has no matches, don't render this category at all
+        if (searchQuery && filteredItems.length === 0) {
+          return;
+        }
+
+        // Section header
+        html += `
+          <div id="section-${category.id}" class="section-divider scroll-mt-32 fade-in-item">
+            <div class="inline-block bg-gray-50 px-6 relative z-10">
+              <div class="flex flex-col items-center">
+                <span class="material-symbols-outlined text-rossoRed mb-1 text-2xl">${category.icon}</span>
+                <h3 class="font-display text-3xl tracking-widest text-rossoDark uppercase">${category.name}</h3>
+              </div>
+            </div>
+          </div>
+        `;
+
+        if (category.isGrid) {
+          // Standard Grid View
+          html += `
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              ${filteredItems.map(item => renderItemCard(item, category.id)).join('')}
+            </div>
+          `;
+        } else {
+          // Carousel View (Main Course)
+          html += `
+            <div class="relative group mb-12">
+              <!-- Slider Arrows -->
+              <button onclick="slideCarousel('${category.id}', -1)" class="absolute -left-3 md:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-gray-400 hover:text-rossoRed hover:border-rossoRed/50 transition-all z-20">
+                <span class="material-symbols-outlined block">arrow_back_ios_new</span>
+              </button>
+              <button onclick="slideCarousel('${category.id}', 1)" class="absolute -right-3 md:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-gray-400 hover:text-rossoRed hover:border-rossoRed/50 transition-all z-20">
+                <span class="material-symbols-outlined block">arrow_forward_ios</span>
+              </button>
+              
+              <!-- Slider Track Container -->
+              <div id="carousel-${category.id}" class="flex overflow-x-auto gap-6 no-scrollbar scroll-smooth snap-x snap-mandatory py-4">
+                ${filteredItems.map(item => `
+                  <div class="snap-start snap-always shrink-0 w-80 md:w-72 bg-white rounded-2xl overflow-hidden card-shadow border border-gray-100 group transition-all duration-300 hover:border-rossoRed/20">
+                    <div class="relative h-48 overflow-hidden">
+                      <img alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${item.image}">
+                      ${item.bestseller ? `<span class="absolute top-3 left-3 bg-rossoRed text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider shadow-md">Bestseller</span>` : ''}
+                    </div>
+                    <div class="p-4 flex flex-col justify-between h-44">
+                      <div>
+                        <h4 class="font-bold text-gray-800">${item.name}</h4>
+                        <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">${item.description}</p>
+                      </div>
+                      <div class="flex justify-between items-center mt-3">
+                        <span class="price-tag font-bold text-lg">₹${item.price}</span>
+                        ${renderCartButton(item)}
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      if (html === '') {
+        html = `
+          <div class="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
+            <span class="material-symbols-outlined text-gray-300 text-6xl mb-4">search_off</span>
+            <h4 class="font-bold text-xl text-rossoDark">No dishes found</h4>
+            <p class="text-sm text-gray-400 mt-2">Try searching for something else or browse categories.</p>
+            <button onclick="clearSearch()" class="mt-6 bg-rossoRed hover:bg-red-700 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all">Clear Search</button>
+          </div>
+        `;
+      }
+
+      menuContainer.innerHTML = html;
+    }
+
+    // Render card item in standard grid
+    function renderItemCard(item, catId) {
+      return `
+        <div class="bg-white rounded-2xl p-4 flex gap-4 card-shadow border border-gray-50 group hover:border-rossoRed/20 transition-all duration-300 snap-start">
+          <div class="w-28 h-28 md:w-32 md:h-32 flex-shrink-0 overflow-hidden rounded-xl bg-gray-100">
+            <img alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${item.image}">
+          </div>
+          <div class="flex-grow flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start gap-2">
+                <h4 class="font-bold text-base md:text-lg text-rossoDark leading-tight">${item.name}</h4>
+                ${item.bestseller ? `<span class="bg-rossoRed text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase flex-shrink-0">Best</span>` : ''}
+              </div>
+              <p class="text-[11px] md:text-xs text-gray-500 mt-1.5 leading-relaxed line-clamp-2">${item.description}</p>
+            </div>
+            <div class="flex justify-between items-center mt-3">
+              <span class="price-tag text-lg md:text-xl">₹${item.price}</span>
+              ${renderCartButton(item)}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Renders the correct button based on whether item is in cart
+    function renderCartButton(item) {
+      const quantity = cart[item.id] ? cart[item.id].qty : 0;
+      if (quantity > 0) {
+        return `
+          <div class="flex items-center bg-rossoRed text-white rounded-full overflow-hidden shadow-md">
+            <button onclick="updateQty('${item.id}', -1)" class="px-2.5 py-1.5 hover:bg-red-700 transition-colors font-bold text-xs">-</button>
+            <span class="px-2 text-xs font-bold min-w-[20px] text-center">${quantity}</span>
+            <button onclick="updateQty('${item.id}', 1)" class="px-2.5 py-1.5 hover:bg-red-700 transition-colors font-bold text-xs">+</button>
+          </div>
+        `;
+      }
+      return `
+        <button onclick="addToCart('${item.id}', '${escapeHtml(item.name)}', ${item.price})" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-rossoRed hover:text-white hover:border-rossoRed transition-all duration-300 font-semibold text-lg">+</button>
+      `;
+    }
+
+    // Helpers
+    function escapeHtml(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    // Cart actions
+    function addToCart(id, name, price) {
+      if (cart[id]) {
+        cart[id].qty++;
+      } else {
+        cart[id] = { name, price, qty: 1 };
+      }
+      updateCartUI();
+      renderMenu();
+    }
+
+    function updateQty(id, delta) {
+      if (cart[id]) {
+        cart[id].qty += delta;
+        if (cart[id].qty <= 0) {
+          delete cart[id];
+        }
+      }
+      updateCartUI();
+      renderMenu();
+    }
+
+    // Slide Carousel
+    function slideCarousel(catId, direction) {
+      const carousel = document.getElementById(`carousel-${catId}`);
+      if (carousel) {
+        const scrollAmount = 300 * direction;
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+
+    // Sidebar Cart Drawer Toggling
+    function toggleCart(open) {
+      if (open) {
+        cartDrawer.classList.remove('translate-x-full');
+        cartBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        cartDrawer.classList.add('translate-x-full');
+        cartBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      }
+    }
+
+    // Update Cart numbers and sliding drawer view
+    function updateCartUI() {
+      const cartKeys = Object.keys(cart);
+      let totalQty = 0;
+      let totalPrice = 0;
+
+      cartKeys.forEach(key => {
+        totalQty += cart[key].qty;
+        totalPrice += cart[key].qty * cart[key].price;
+      });
+
+      // Update badge header
+      if (cartCountBadge) {
+        if (totalQty > 0) {
+          cartCountBadge.innerText = totalQty;
+          cartCountBadge.classList.remove('hidden', 'scale-0');
+          cartCountBadge.classList.add('scale-100');
+        } else {
+          cartCountBadge.classList.add('hidden', 'scale-0');
+          cartCountBadge.classList.remove('scale-100');
+        }
+      }
+
+      if (totalQty > 0) {
+        // Show FAB
+        floatingCartFab.classList.remove('translate-y-24', 'scale-0');
+        floatingCartFab.classList.add('translate-y-0', 'scale-100');
+        fabCartCount.innerText = totalQty;
+      } else {
+        // Hide FAB
+        floatingCartFab.classList.add('translate-y-24', 'scale-0');
+        floatingCartFab.classList.remove('translate-y-0', 'scale-100');
+      }
+
+      // Populate Cart items list
+      if (cartKeys.length === 0) {
+        cartItemsContainer.innerHTML = `
+          <div class="text-center py-20 text-gray-400">
+            <span class="material-symbols-outlined text-5xl mb-2">restaurant</span>
+            <p class="text-sm">Your order is empty.</p>
+            <p class="text-xs mt-1">Add items from the menu to get started!</p>
+          </div>
+        `;
+      } else {
+        cartItemsContainer.innerHTML = cartKeys.map(key => {
+          const item = cart[key];
+          return `
+            <div class="flex items-center justify-between border-b pb-3 border-gray-100">
+              <div class="flex-grow pr-4">
+                <h5 class="font-semibold text-sm text-gray-800">${item.name}</h5>
+                <p class="text-xs text-rossoRed font-bold mt-1">₹${item.price} each</p>
+              </div>
+              <div class="flex items-center bg-gray-100 rounded-full overflow-hidden border">
+                <button onclick="updateQty('${key}', -1)" class="px-2.5 py-1 text-gray-600 hover:bg-gray-200 transition-colors font-bold text-xs">-</button>
+                <span class="px-2 text-xs font-bold min-w-[20px] text-center text-gray-800">${item.qty}</span>
+                <button onclick="updateQty('${key}', 1)" class="px-2.5 py-1 text-gray-600 hover:bg-gray-200 transition-colors font-bold text-xs">+</button>
+              </div>
+              <div class="w-20 text-right">
+                <span class="font-bold text-sm text-gray-800">₹${item.qty * item.price}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      cartSubtotal.innerText = `₹${totalPrice}`;
+      setupCartCheckout();
+    }
+
+    // Set up search
+    function setupSearch() {
+      menuSearchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        if (searchQuery) {
+          clearSearchBtn.classList.remove('hidden');
+        } else {
+          clearSearchBtn.classList.add('hidden');
+        }
+        renderMenu();
+      });
+    }
+
+    function clearSearch() {
+      menuSearchInput.value = '';
+      searchQuery = '';
+      clearSearchBtn.classList.add('hidden');
+      renderMenu();
+    }
+
+    // Build the dynamic WhatsApp URL
+    function setupCartCheckout() {
+      const phoneNumber = '919645227772';
+      let message = '*Cafe Rosso Origin Order*\n';
+      message += '---------------------------------\n';
+      
+      const cartKeys = Object.keys(cart);
+      let total = 0;
+
+      if (cartKeys.length === 0) {
+        // Default message when cart is empty
+        message = 'Hi! I want to inquire about the Cafe Rosso digital menu.';
+      } else {
+        cartKeys.forEach(key => {
+          const item = cart[key];
+          const itemTotal = item.price * item.qty;
+          message += `• ${item.qty}x *${item.name}* (₹${item.price}) - ₹${itemTotal}\n`;
+          total += itemTotal;
+        });
+        message += '---------------------------------\n';
+        message += `*Total Order Value: ₹${total}*\n\n`;
+        message += 'Please confirm my order!';
+      }
+
+      const encodedMessage = encodeURIComponent(message);
+      const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+      // Update header button and checkout drawer button
+      whatsappCheckoutBtn.onclick = () => {
+        window.open(waUrl, '_blank');
+      };
+      
+      // Update header link
+      const headerWaBtn = document.getElementById('whatsapp-order-btn-header');
+      if (headerWaBtn) {
+        headerWaBtn.href = waUrl;
+      }
+    }
+
+    // Header styling on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.remove('py-3');
+        header.classList.add('py-2', 'shadow-lg');
+      } else {
+        header.classList.remove('py-2', 'shadow-lg');
+        header.classList.add('py-3');
+      }
+    });
+
+    // Run init
+    window.onload = init;
+  </script>
+</body>
+</html>
