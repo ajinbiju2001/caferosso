@@ -92,10 +92,9 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-900 overflow-x-hidden">
 
-  <!-- BEGIN: MainHeader -->
   <header class="fixed top-0 left-0 right-0 z-40 sticky-nav text-white px-4 md:px-6 py-3 transition-all duration-300">
-    <div class="max-w-7xl mx-auto grid grid-cols-3 items-center">
-      <div class="flex items-center gap-3 justify-start">
+    <div class="max-w-7xl mx-auto flex justify-between items-center relative w-full">
+      <div class="flex items-center gap-3">
         <div class="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden shadow-lg">
           <img src="logo.png" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
         </div>
@@ -104,10 +103,10 @@
           <span class="font-script text-xs text-yellow-500 italic">Origin</span>
         </div>
       </div>
-      <nav class="hidden md:flex justify-center text-xs font-semibold uppercase tracking-wider">
+      <nav class="hidden md:flex absolute left-1/2 -translate-x-1/2 text-xs font-semibold uppercase tracking-wider">
         <a class="text-rossoRed border-b-2 border-rossoRed pb-1 transition-colors" href="#menu-sections">Menu</a>
       </nav>
-      <div class="flex items-center gap-3 justify-end">
+      <div class="flex items-center gap-3">
         <!-- Floating Cart Indicator Trigger -->
         <button onclick="toggleCart(true)" id="header-cart-btn" class="relative bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all">
           <span class="material-symbols-outlined block text-white text-xl">shopping_cart</span>
