@@ -380,6 +380,10 @@
       { id: 'starters_veg', name: 'Starters Veg', icon: 'veg_vegetarian', isGrid: true },
       { id: 'starters_non_veg', name: 'Starters Non Veg', icon: 'kebab_dining', isGrid: true },
       { id: 'build_your_own', name: 'Build Your Own', icon: 'construction', isGrid: false },
+      { id: 'house_special_burgers', name: 'House Special Burgers', icon: 'lunch_dining', isGrid: true },
+      { id: 'sandwiches_subs', name: 'Sandwiches & Subs', icon: 'bakery_dining', isGrid: true },
+      { id: 'soups', name: 'Soups', icon: 'soup_kitchen', isGrid: true },
+      { id: 'salads', name: 'Salads', icon: 'eco', isGrid: true },
       { id: 'main_plates', name: 'Main Plates', icon: 'flatware', isGrid: true },
       { id: 'pastas', name: 'Pastas', icon: 'dinner_dining', isGrid: true },
       { id: 'french_toast', name: 'French Toast', icon: 'bakery_dining', isGrid: true },
@@ -443,6 +447,32 @@
         { id: 'sn8', name: 'Animal Fries Chicken', description: 'Crispy golden fries loaded with melted cheese, sweet caramelized onions, and our signature tangy secret sauce. A rich, savoury, and undeniably indulgent treat.', price: 330, image: 'loaded_fries_chicken.png', veg: false },
         { id: 'sn9', name: 'Animal Fries Beef', description: 'Crispy golden fries loaded with melted cheese, sweet caramelized onions, and our signature tangy secret sauce. A rich, savoury, and undeniably indulgent treat.', price: 350, image: 'loaded_fries_beef.png', veg: false }
       ],
+      house_special_burgers: [
+        { id: 'hb1', name: 'Rosso New Your Smash Beef Burger', description: 'Juicy smashed beef patty seared to perfection, layered with American cheese, caramelised onions, and signature house sauce.', price: 340, veg: false, addOns: [{name: 'Smash Patty', price: 100}, {name: 'Fried Egg', price: 40}, {name: 'Grilled Mushrooms', price: 40}, {name: 'Cheese', price: 20}, {name: 'Fried Jalapeno', price: 40}], image: 'rosso_new_york_smash_beef_burger.jpg' },
+        { id: 'hb2', name: 'Quarter Pounder Beef Burger', description: 'Our signature 1/4 lb. seasoned beef patty, loaded with melted cheese, classic pickles, onions, ketchup, and mayo on a soft, toasted bun. Big beef, no fuss.', price: 360, veg: false, addOns: [{name: 'Beef Patty 1/4 lb', price: 120}, {name: 'Fried Egg', price: 40}, {name: 'Grilled Mushrooms', price: 40}, {name: 'Cheese', price: 20}, {name: 'Fried Jalapeno', price: 40}], image: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg' },
+        { id: 'hb3', name: 'Jalapeno Smash Burger', description: 'Juicy smashed beef patty seared to perfection, layered with American cheese, caramelised onions, jalapenos, bacon jam and signature house sauce.', price: 350, veg: false, addOns: [{name: 'Smash Patty', price: 100}, {name: 'Fried Egg', price: 40}, {name: 'Grilled Mushrooms', price: 40}, {name: 'Cheese', price: 20}, {name: 'Fried Jalapeno', price: 40}], image: 'jalapeno_smash_burger.jpg' },
+        { id: 'hb4', name: 'Korean Fried Chicken Burger', description: 'Crispy fried chicken glazed in gochujang honey sauce, balanced with fresh coleslaw for a perfect sweet-spicy crunch.', price: 380, veg: false, image: 'korean_fried_chicken_burger.jpg' },
+        { id: 'hb5', name: 'Grilled BBQ Chicken Burger', description: 'Grilled chicken breast mixed in house special bbq sauce topped with cheese onions and lettuce.', price: 320, veg: false, image: 'grilled_bbq_chicken_burger.jpg' },
+        { id: 'hb6', name: 'Tandoori Paneer Burger', description: 'Char-grilled paneer marinated in tandoori spices, topped with mint mayo and fresh spiced salad.', price: 320, veg: true, image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/%D7%94%D7%9E%D7%91%D7%95%D7%A8%D7%92%D7%A8_%D7%98%D7%91%D7%A2%D7%95%D7%A0%D7%99.jpg' }
+      ],
+      sandwiches_subs: [
+        { id: 'ss1', name: 'Roast Beef Sourdough', description: 'Tender, slow-roasted beef piled high on a toasted, tangy sourdough. Layered with grilled veggies, chimichurri sauce, and a spicy house sauce for a bold finish. A perfectly balanced, hearty sandwich that brings a satisfying crunch to every bite.', price: 450, veg: false, image: 'roast_beef_sourdough.png' },
+        { id: 'ss2', name: 'Red Pesto Pistachio Chicken', description: 'Tender and juicy chicken thighs on a toasted, tangy sourdough. Layered with creamy red pesto sauce and pistachio sauce and cheese. A sandwich to swear by.', price: 450, veg: false, image: 'red_pesto_pistachio_chicken.png' },
+        { id: 'ss3', name: 'Cheesy Chicken with Pesto', description: 'Cheese filled sourdough bread filled with succulent chicken thighs and topped with pesto sauce and veggies.', price: 420, veg: false, image: 'cheesy_chicken_pesto.png' },
+        { id: 'ss4', name: 'Philly Cheese Chicken', description: 'Thinly cut chicken breast, grilled onions and peppers, topped with melted cheese. Nested in a buttery toasted brioche roll.', price: 380, veg: false, image: 'philly_cheese_chicken.png' },
+        { id: 'ss5', name: 'Philly Cheese Steak', description: 'A classic Philly cheese steak made with thinly cut rib eye grilled onions and peppers. Nested in a buttery toasted brioche rolled and topped with melted cheese.', price: 410, veg: false, image: 'philly_cheese_steak.png' },
+        { id: 'ss6', name: 'American Roasted Veg Sando', description: 'A medley of herb-roasted vegetables layered in ciabatta with a smooth house-made dip.', price: 320, veg: true, image: 'american_roasted_veg_sando.png' }
+      ],
+      soups: [
+        { id: 'sp1', name: 'Cream of Mushroom & Thyme', description: 'A velvety cream soup crafted with sauteed button mushrooms, slow-infused garlic, and fresh thyme, finished with a touch of cream. Served with toasted cheese bread and crispy mushroom garnish.', price: 210, veg: true, addOns: [{name: 'Add Chicken', price: 60}], image: 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Cream_Mushroom_soup_2.jpg' },
+        { id: 'sp2', name: 'Burnt Garlic Broccoli Soup', description: 'Silky smooth broccoli purée elevated with the deep aroma of roasted garlic and a drizzle of extra virgin olive oil, paired with golden cheese toasts.', price: 210, veg: true, addOns: [{name: 'Add Chicken', price: 60}], image: 'burnt_garlic_broccoli_soup.jpg' },
+        { id: 'sp3', name: 'Hot and Sour Soup', description: 'A hearty, street-style favourite loaded with crunchy, seasonal vegetables in a glassy, spiced-up broth. Flavoured with soy sauce, chillies, and a zesty vinegar tang.', price: 190, veg: true, addOns: [{name: 'Add Chicken', price: 60}], image: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Ping_SJ_hot_%26_sour_soup.JPG' }
+      ],
+      salads: [
+        { id: 'sl1', name: 'California Chicken Salad', description: 'Crisp romaine lettuce and tender grilled chicken tomatoes, tossed with sweet corn, beans and diced tomatoes. Topped with crunchy tortilla strips and a drizzle of our signature house dressing.', price: 340, veg: false, image: 'https://upload.wikimedia.org/wikipedia/commons/4/42/Flickr_sa_ku_ra_10556400--Chicken_salad.jpg' },
+        { id: 'sl2', name: 'Café Ceaser Salad', description: 'A wholesome mix of crisp romaine lettuce, cherry tomatoes, and shaved Parmesan, tossed in a light creamy dressing, topped with grilled chicken or seasonal vegetables.', price: 250, veg: true, addOns: [{name: 'Add Chicken', price: 90}], image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Caesar_salad_%282%29.jpg' },
+        { id: 'sl3', name: 'Grilled Aubergine Salad', description: 'Tender open-fire roasted aubergine blended with feta, pesto, served over crisp mixed greens.', price: 250, veg: true, image: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      ],
       main_plates: [
         { id: 'mp1', name: 'Classic French Beef Steak', description: 'Premium beef tenderloin grilled to your preference, served with rich red wine jus, creamy mashed potatoes, and butter-poached vegetables.', price: 410, image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=400', veg: false },
         { id: 'mp2', name: 'Grilled Sea Bass Steak', description: 'Pan-sear salmon finished in herb butter, served with a delicate cauliflower and leek mash, complemented by parsley purée.', price: 450, image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&q=80&w=400', veg: false },
@@ -454,8 +484,8 @@
       ],
       pastas: [
         { id: 'pa1', name: 'Fettuccini Ala Fungi', description: 'Fresh fettuccine tossed in a rich, velvety cream sauce with pan-roasted mixed wild mushrooms, garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 290, image: 'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&q=80&w=400', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] },
-        { id: 'pa2', name: 'Fettuccini Ala Rosso', description: 'Fresh fettuccine tossed in a rich, velvety pink sauce with pan-roasted garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 260, image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&q=80&w=400', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] },
-        { id: 'pa3', name: 'Creamy Pesto Fettuccini', description: 'Fresh fettuccine tossed in a rich, creamy pesto sauce with pan-roasted garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 260, image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&q=80&w=400', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] }
+        { id: 'pa2', name: 'Fettuccini Ala Rosso', description: 'Fresh fettuccine tossed in a rich, velvety pink sauce with pan-roasted garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 260, image: 'fettuccini.jpg', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] },
+        { id: 'pa3', name: 'Creamy Pesto Fettuccini', description: 'Fresh fettuccine tossed in a rich, creamy pesto sauce with pan-roasted garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 260, image: 'creamy_pesto_fettuccini.jpg', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] }
       ],
       french_toast: [
         { id: 'ft1', name: 'Korean Chocolate Toast', description: 'A Korean style toast topped with rich and silky chocolate sauce. A mind blowing twist on the classic French toast.', price: 250, image: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&q=80&w=400', veg: true },
@@ -606,6 +636,7 @@
     let cart = {};
     let currentCategory = 'starters_veg';
     let searchQuery = '';
+    let isScrollingFromClick = false;
 
     // Elements
     const categorySlider = document.getElementById('category-slider');
@@ -630,6 +661,7 @@
       setupCartCheckout();
       updateCartUI();
       setupDragToScroll();
+      setupScrollSpy();
     }
 
     // Render category selectors
@@ -669,8 +701,9 @@
     // Scroll helper logic removed in favor of mouse drag-to-scroll
 
     function selectCategory(catId) {
+      isScrollingFromClick = true;
       currentCategory = catId;
-      renderCategories();
+      updateCategoryStyles(catId);
 
       // Auto-scroll the active category button into view in the slider
       const activeBtn = document.getElementById(`cat-btn-${catId}`);
@@ -683,9 +716,8 @@
         menuSearchInput.value = '';
         searchQuery = '';
         clearSearchBtn.classList.add('hidden');
+        renderMenu();
       }
-      
-      renderMenu();
 
       // Smooth scroll to the menu section
       const targetElement = document.getElementById(`section-${catId}`);
@@ -702,6 +734,10 @@
           behavior: 'smooth'
         });
       }
+
+      setTimeout(() => {
+        isScrollingFromClick = false;
+      }, 1000);
     }
 
     // Setup drag-to-scroll functionality for the category slider
@@ -750,6 +786,54 @@
           e.stopPropagation();
         }
       }, true); // Capture phase is critical to intercept inline onclick handlers!
+    }
+
+    function setupScrollSpy() {
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        if (isScrollingFromClick) return;
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            const catId = sectionId.replace('section-', '');
+            if (currentCategory !== catId) {
+              currentCategory = catId;
+              updateCategoryStyles(catId);
+              
+              const activeBtn = document.getElementById(`cat-btn-${catId}`);
+              if (activeBtn) {
+                activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+              }
+            }
+          }
+        });
+      }, observerOptions);
+
+      CATEGORIES.forEach(cat => {
+        const el = document.getElementById(`section-${cat.id}`);
+        if (el) observer.observe(el);
+      });
+    }
+
+    function updateCategoryStyles(activeCatId) {
+      CATEGORIES.forEach(cat => {
+        const btn = document.getElementById(`cat-btn-${cat.id}`);
+        if (!btn) return;
+        
+        const innerDiv = btn.firstElementChild;
+        if (cat.id === activeCatId) {
+          btn.className = 'flex flex-col items-center gap-1.5 min-w-fit transition-all duration-300 group text-rossoRed';
+          innerDiv.className = `px-5 py-2.5 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 bg-rossoRed text-white shadow-md scale-105 gap-${cat.icon === 'veg_vegetarian' ? '1' : '1.5'}`;
+        } else {
+          btn.className = 'flex flex-col items-center gap-1.5 min-w-fit transition-all duration-300 group text-rossoNavy/60 hover:text-rossoRed';
+          innerDiv.className = `px-5 py-2.5 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 bg-[#ebdccb]/30 border border-rossoNavy/10 text-rossoNavy gap-${cat.icon === 'veg_vegetarian' ? '1' : '1.5'}`;
+        }
+      });
     }
 
     // Render the complete menu based on current filter / query
@@ -913,11 +997,19 @@
         }
         const savedVal = itemSelections[item.id].option;
         priceHtml = `
-          <div class="flex flex-col gap-1.5 w-full">
+          <div class="flex flex-col gap-1.5 w-full mt-1">
             <label class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60">Select Option:</label>
-            <select id="select-option-${item.id}" onchange="updateItemOption('${item.id}', this.value, '${catId}')" class="bg-[#ebdccb]/30 border border-rossoNavy/20 rounded px-2.5 py-1.5 text-xs font-semibold text-rossoNavy focus:border-rossoRed focus:ring-0 cursor-pointer relative z-10">
-              ${optionsList.map(opt => `<option value="${opt.name}" ${opt.name === savedVal ? 'selected' : ''}>${opt.name} - ₹${opt.price}</option>`).join('')}
-            </select>
+            <div class="flex flex-wrap gap-2 relative z-10">
+              ${optionsList.map(opt => {
+                const isSelected = opt.name === savedVal;
+                return `
+                  <button type="button" onclick="updateItemOption('${item.id}', '${opt.name}', '${catId}')" class="flex items-center justify-center gap-1 text-[10px] font-bold tracking-widest uppercase cursor-pointer px-3 py-1.5 rounded-full border transition-all duration-300 select-none ${isSelected ? 'bg-rossoRed text-white border-rossoRed shadow-sm' : 'bg-[#ebdccb]/30 text-rossoNavy border-rossoNavy/10 hover:border-rossoRed/30 hover:bg-[#ebdccb]/50'}">
+                    <span>${opt.name}</span>
+                    <span class="${isSelected ? 'text-white/90' : 'text-rossoRed'} ml-1">₹${opt.price}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
           </div>
         `;
       } else {
@@ -930,14 +1022,15 @@
         addOnsHtml = `
           <div class="mt-3 pt-3 border-t border-rossoNavy/10 w-full">
             <p class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60 mb-2">Customizations:</p>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-wrap gap-2 mt-2">
               ${item.addOns.map(add => {
                 const addOnId = `${item.id}_addon_${add.name.replace(/\s+/g, '_')}`;
                 const isChecked = itemSelections[item.id] && itemSelections[item.id].addons.includes(add.name);
                 return `
-                  <label class="flex items-center gap-2 text-xs font-semibold text-rossoNavy cursor-pointer">
-                    <input type="checkbox" id="${addOnId}" onchange="toggleItemAddon('${item.id}', '${add.name}', this.checked, '${catId}')" ${isChecked ? 'checked' : ''} class="rounded border-rossoNavy/20 text-rossoRed focus:ring-0 bg-transparent">
-                    <span>${add.name} (+₹${add.price})</span>
+                  <label class="flex items-center justify-center gap-1 text-[10px] font-bold tracking-widest uppercase cursor-pointer px-3 py-1.5 rounded-full border transition-all duration-300 select-none ${isChecked ? 'bg-rossoRed text-white border-rossoRed shadow-sm' : 'bg-[#ebdccb]/30 text-rossoNavy border-rossoNavy/10 hover:border-rossoRed/30 hover:bg-[#ebdccb]/50'}">
+                    <input type="checkbox" id="${addOnId}" onchange="toggleItemAddon('${item.id}', '${add.name}', this.checked, '${catId}')" ${isChecked ? 'checked' : ''} class="hidden">
+                    <span>${add.name}</span>
+                    <span class="${isChecked ? 'text-white/90' : 'text-rossoRed'}">+₹${add.price}</span>
                   </label>
                 `;
               }).join('')}
@@ -1017,9 +1110,8 @@
         `;
       }
       return `
-        <button onclick="handleAddClick('${item.id}')" class="px-4 py-2 bg-rossoNavy text-white hover:bg-rossoRed rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-350 flex items-center gap-1.5">
-          <span class="material-symbols-outlined block text-[15px] font-bold">add</span>
-          Add To Order
+        <button onclick="handleAddClick('${item.id}')" class="w-9 h-9 flex items-center justify-center bg-rossoNavy text-white hover:bg-rossoRed hover:scale-105 rounded-full transition-all duration-300 shadow-md">
+          <span class="material-symbols-outlined text-[20px] font-bold leading-none">add</span>
         </button>
       `;
     }
