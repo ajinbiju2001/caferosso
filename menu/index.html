@@ -39,7 +39,9 @@
 
   <style>
     /* Printed menu styles */
-    body {
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
       background-color: #f4ebe1;
       color: #0c2340;
       font-family: 'Outfit', sans-serif;
@@ -111,7 +113,7 @@
     
     /* Custom Smooth Animations */
     .cart-drawer {
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
       background-color: #f4ebe1;
       border-left: 2px solid #0c2340;
     }
@@ -321,7 +323,7 @@
 
   <!-- BEGIN: Sliding Cart Drawer -->
   <div id="cart-backdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-black/40 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <div id="cart-drawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 shadow-2xl cart-drawer translate-x-full flex flex-col">
+  <div id="cart-drawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 shadow-2xl cart-drawer translate-x-full flex flex-col invisible">
     <!-- Cart Header -->
     <div class="p-4 border-b flex justify-between items-center bg-rossoNavy text-rossoPaper">
       <div class="flex items-center gap-2">
@@ -361,7 +363,7 @@
   <!-- END: Sliding Cart Drawer -->
 
   <!-- BEGIN: Floating Action Button (FAB) Cart -->
-  <button id="floating-cart-fab" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-rossoRed text-white p-4.5 rounded-full shadow-2xl flex items-center justify-center gap-2 hover:bg-red-700 transition-all duration-300 translate-y-24 scale-0">
+  <button id="floating-cart-fab" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-rossoRed text-white h-14 px-5 rounded-full shadow-2xl flex items-center justify-center gap-2.5 hover:bg-red-700 hover:scale-105 transition-all duration-300 translate-y-24 scale-0">
     <span class="material-symbols-outlined block text-2xl">shopping_cart</span>
     <span id="fab-cart-count" class="bg-white text-rossoRed text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
   </button>
@@ -1058,10 +1060,10 @@
     // Sidebar Cart Drawer Toggling
     function toggleCart(open) {
       if (open) {
-        cartDrawer.classList.remove('translate-x-full');
+        cartDrawer.classList.remove('translate-x-full', 'invisible');
         cartBackdrop.classList.remove('opacity-0', 'pointer-events-none');
       } else {
-        cartDrawer.classList.add('translate-x-full');
+        cartDrawer.classList.add('translate-x-full', 'invisible');
         cartBackdrop.classList.add('opacity-0', 'pointer-events-none');
       }
     }
