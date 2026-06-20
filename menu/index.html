@@ -240,23 +240,9 @@
   <div id="category-bar-sticky" class="sticky top-[56px] md:top-[64px] z-30 bg-rossoPaper/95 backdrop-blur-md border-b border-rossoNavy/5 transition-all duration-300 w-full" style="margin-top:0.5rem;">
     <div class="max-w-4xl mx-auto px-4">
       <div class="relative flex items-center">
-        <!-- Left Arrow -->
-        <button id="cat-arrow-left" onclick="scrollCategories(-1)" class="hidden md:flex absolute left-0 z-10 w-9 h-9 items-center justify-center rounded-full bg-rossoPaper shadow-md border border-rossoNavy/10 text-rossoNavy/60 hover:text-rossoRed hover:border-rossoRed/30 transition-all duration-200 hover:scale-110 active:scale-95 -translate-x-1" aria-label="Scroll categories left">
-          <span class="material-symbols-outlined text-[18px]">chevron_left</span>
-        </button>
-        <!-- Fade left -->
-        <div id="cat-fade-left" class="hidden pointer-events-none absolute left-0 top-0 bottom-0 w-8 z-[5] bg-gradient-to-r from-rossoPaper/95 to-transparent"></div>
-
-        <div class="flex overflow-x-auto gap-3 md:gap-4 px-4 py-3 md:py-4 no-scrollbar scroll-smooth items-center text-xs font-bold uppercase tracking-widest mx-0 md:mx-10" id="category-slider">
+        <div class="flex overflow-x-auto gap-3 md:gap-4 px-4 py-3 md:py-4 no-scrollbar scroll-smooth items-center text-xs font-bold uppercase tracking-widest w-full" id="category-slider">
           <!-- Generated Dynamically -->
         </div>
-
-        <!-- Fade right -->
-        <div id="cat-fade-right" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 z-[5] bg-gradient-to-l from-rossoPaper/95 to-transparent"></div>
-        <!-- Right Arrow -->
-        <button id="cat-arrow-right" onclick="scrollCategories(1)" class="hidden md:flex absolute right-0 z-10 w-9 h-9 items-center justify-center rounded-full bg-rossoPaper shadow-md border border-rossoNavy/10 text-rossoNavy/60 hover:text-rossoRed hover:border-rossoRed/30 transition-all duration-200 hover:scale-110 active:scale-95 translate-x-1" aria-label="Scroll categories right">
-          <span class="material-symbols-outlined text-[18px]">chevron_right</span>
-        </button>
       </div>
     </div>
   </div>
@@ -563,57 +549,9 @@
           </button>
         `;
       }).join('');
-      // After rendering, update arrow visibility
-      updateCategoryArrows();
     }
 
-    // Scroll the category slider by one "page" in the given direction
-    function scrollCategories(direction) {
-      const slider = document.getElementById('category-slider');
-      const scrollAmount = slider.clientWidth * 0.65;
-      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-    }
-
-    // Show/hide arrow buttons and fade hints based on scroll position
-    function updateCategoryArrows() {
-      const slider = document.getElementById('category-slider');
-      const arrowLeft = document.getElementById('cat-arrow-left');
-      const arrowRight = document.getElementById('cat-arrow-right');
-      const fadeLeft = document.getElementById('cat-fade-left');
-      const fadeRight = document.getElementById('cat-fade-right');
-      if (!slider || !arrowLeft || !arrowRight) return;
-
-      const scrollLeft = slider.scrollLeft;
-      const maxScroll = slider.scrollWidth - slider.clientWidth;
-      const canScrollLeft = scrollLeft > 4;
-      const canScrollRight = maxScroll - scrollLeft > 4;
-
-      // Desktop arrows
-      arrowLeft.classList.toggle('md:flex', canScrollLeft);
-      arrowLeft.classList.toggle('hidden', !canScrollLeft);
-      arrowRight.classList.toggle('md:flex', canScrollRight);
-      arrowRight.classList.toggle('hidden', !canScrollRight);
-
-      // Mobile fade hints (always shown on mobile if scrollable)
-      if (fadeLeft) {
-        fadeLeft.classList.toggle('hidden', !canScrollLeft);
-        fadeLeft.classList.toggle('block', canScrollLeft);
-      }
-      if (fadeRight) {
-        fadeRight.classList.toggle('hidden', !canScrollRight);
-        fadeRight.classList.toggle('block', canScrollRight);
-      }
-    }
-
-    // Attach scroll listener to slider for arrow updates
-    (function setupCategoryScroll() {
-      const slider = document.getElementById('category-slider');
-      if (slider) {
-        slider.addEventListener('scroll', updateCategoryArrows, { passive: true });
-        // Also update on window resize
-        window.addEventListener('resize', updateCategoryArrows, { passive: true });
-      }
-    })();
+    // Scroll helper logic removed in favor of mouse drag-to-scroll
 
     function selectCategory(catId) {
       currentCategory = catId;
