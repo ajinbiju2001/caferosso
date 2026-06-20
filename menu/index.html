@@ -12,7 +12,7 @@
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
   <!-- Google Fonts for typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,500&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Material Symbols Outlined -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
@@ -23,13 +23,14 @@
         extend: {
           colors: {
             rossoRed: '#c8102e',
-            rossoDark: '#1a1a1a',
-            rossoCharcoal: '#333333',
+            rossoNavy: '#0c2340',
+            rossoPaper: '#f4ebe1',
+            rossoDarkPaper: '#ebdccb',
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Oswald', 'sans-serif'],
-            script: ['Playfair Display', 'serif'],
+            sans: ['Outfit', 'sans-serif'],
+            display: ['Cinzel', 'serif'],
+            serif: ['Cormorant Garamond', 'serif'],
           }
         }
       }
@@ -37,36 +38,57 @@
   </script>
 
   <style>
-    .hero-heading {
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    /* Printed menu styles */
+    body {
+      background-color: #f4ebe1;
+      color: #0c2340;
+      font-family: 'Outfit', sans-serif;
     }
+    
     .price-tag {
-      color: #c8102e;
-      font-weight: 700;
+      color: #0c2340;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
     }
-    .card-shadow {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    }
+    
     .sticky-nav {
-      background: rgba(26, 26, 26, 0.85);
+      background: rgba(244, 235, 225, 0.9);
       backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(12, 35, 64, 0.1);
     }
+    
     .section-divider {
       position: relative;
       text-align: center;
-      margin: 3rem 0;
+      margin: 3.5rem 0 2.5rem 0;
     }
-    .section-divider::before, .section-divider::after {
+    .section-divider::before {
       content: "";
       position: absolute;
       top: 50%;
-      width: 35%;
+      left: 5%;
+      right: 5%;
       height: 1px;
-      background: #e5e7eb;
+      background: rgba(12, 35, 64, 0.15);
+      z-index: 1;
     }
-    .section-divider::before { left: 0; }
-    .section-divider::after { right: 0; }
+    
+    /* Decorative double border */
+    .menu-border-container {
+      border: 1px solid #0c2340;
+      position: relative;
+    }
+    .menu-border-container::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: 4px;
+      bottom: 4px;
+      border: 1px solid #0c2340;
+      pointer-events: none;
+      border-radius: 4px;
+    }
     
     /* Hide scrollbars but keep functionality */
     .no-scrollbar::-webkit-scrollbar {
@@ -77,9 +99,21 @@
       scrollbar-width: none;
     }
     
+    /* Drag-to-scroll styles */
+    #category-slider {
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #category-slider.grabbing {
+      cursor: grabbing;
+    }
+    
     /* Custom Smooth Animations */
     .cart-drawer {
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      background-color: #f4ebe1;
+      border-left: 2px solid #0c2340;
     }
     .fade-in-item {
       animation: fadeIn 0.4s ease-out forwards;
@@ -90,26 +124,27 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 overflow-x-hidden">
+<body class="overflow-x-hidden">
 
-  <header class="fixed top-0 left-0 right-0 z-40 sticky-nav text-white px-4 md:px-6 py-3 transition-all duration-300">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-40 sticky-nav text-rossoNavy px-4 md:px-6 py-3 transition-all duration-300">
     <div class="max-w-7xl mx-auto flex justify-between items-center relative w-full">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden shadow-lg border border-white/10">
+        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-rossoNavy/20">
           <img src="logo.png" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
         </div>
         <div>
-          <span class="font-display text-lg md:text-xl tracking-wider font-bold block leading-none text-white">CAFE ROSSO</span>
-          <span class="font-script text-xs text-rossoRed italic font-bold">Origin</span>
+          <span class="font-display text-sm md:text-base tracking-widest font-bold block leading-none">CAFÉ ROSSO</span>
+          <span class="font-serif text-xs text-rossoRed italic font-semibold">Origin</span>
         </div>
       </div>
-      <nav class="hidden md:flex absolute left-1/2 -translate-x-1/2 text-xs font-semibold uppercase tracking-wider">
-        <a class="text-rossoRed border-b-2 border-rossoRed pb-1 transition-colors" href="#menu-sections">Menu</a>
+      <nav class="hidden md:flex absolute left-1/2 -translate-x-1/2 text-xs font-bold uppercase tracking-widest gap-6">
+        <a class="text-rossoRed pb-1 transition-colors" href="#menu-sections">Menu Book</a>
       </nav>
       <div class="flex items-center gap-3">
         <!-- Floating Cart Indicator Trigger -->
-        <button onclick="toggleCart(true)" id="header-cart-btn" class="relative bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all">
-          <span class="material-symbols-outlined block text-white text-xl">shopping_cart</span>
+        <button onclick="toggleCart(true)" id="header-cart-btn" class="relative bg-rossoNavy/5 hover:bg-rossoNavy/10 text-rossoNavy p-2.5 rounded-full transition-all">
+          <span class="material-symbols-outlined block text-xl">shopping_cart</span>
           <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-rossoRed text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold hidden scale-0 transition-all duration-300">0</span>
         </button>
       </div>
@@ -117,21 +152,35 @@
   </header>
   <!-- END: MainHeader -->
 
-  <!-- BEGIN: HeroSection -->
-  <section class="relative h-[550px] md:h-[600px] flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-black/60 z-10"></div>
-      <img alt="Hero Background" class="w-full h-full object-cover animate-[scaleUp_20s_infinite_alternate]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL0z64M61sD3jDt0YD_Pi5g55CK5acfoNZPMZk3hea94XgGpQn-s1AolBl7SoKh7fYi0_p6sWoREvniKG202_t9ogQxZClr2GkHw64QOwwj8h6PTy1OxrdKYm1rVYNEOjl2G_QtQNWTfngsLsersIdQu57jUXHDf0I35kD-4HMLOlNpQxl9WNKjL96Wh-rS4cNJQ0H7FipnNs5AqpKQeCl-9YpH08CS9sjaKN4QnDJoqfoq63IxKaNQtTMSCbgUTP6PtcD3W28a_c">
-    </div>
-    <div class="relative z-20 text-center text-white space-y-4 px-4">
-      <p class="font-script text-3xl md:text-4xl text-yellow-500 italic mb-2">Welcome to</p>
-      <h1 class="font-display text-6xl md:text-9xl leading-none hero-heading tracking-widest">CAFE ROSSO</h1>
-      <h2 class="font-script text-3xl md:text-5xl text-rossoRed italic mt-2">Origin</h2>
-      <div class="flex items-center justify-center gap-4 mt-8 md:mt-12">
-        <span class="h-px w-8 md:w-12 bg-white/50"></span>
-        <p class="uppercase tracking-[0.3em] text-xs md:text-base font-light">Good Food. Great Mood.</p>
-        <span class="h-px w-8 md:w-12 bg-white/50"></span>
+  <!-- BEGIN: HeroSection (Cover Book Style) -->
+  <section class="relative min-h-[500px] flex items-center justify-center overflow-hidden pt-16 bg-[#eedccb]/40 border-b border-rossoNavy/10">
+    <!-- Corner Decorative Ornaments -->
+    <div class="absolute top-20 left-4 w-12 h-12 border-t-2 border-l-2 border-rossoNavy/40 pointer-events-none rounded-tl-lg"></div>
+    <div class="absolute top-20 right-4 w-12 h-12 border-t-2 border-r-2 border-rossoNavy/40 pointer-events-none rounded-tr-lg"></div>
+    <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-rossoNavy/40 pointer-events-none rounded-bl-lg"></div>
+    <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-rossoNavy/40 pointer-events-none rounded-br-lg"></div>
+
+    <div class="relative z-20 text-center text-rossoNavy space-y-6 px-6 py-12 max-w-2xl mx-auto flex flex-col items-center">
+      <!-- Big Cafe Rosso Badge -->
+      <div class="w-32 h-32 rounded-full bg-rossoRed flex items-center justify-center shadow-xl border-4 border-rossoPaper mb-2">
+        <div class="text-center text-white font-display text-xl font-bold tracking-tighter leading-tight flex flex-col items-center justify-center">
+          <span class="border-b border-white/40 pb-0.5 mb-0.5 tracking-widest text-base">CAFÉ</span>
+          <span class="tracking-[0.15em] text-lg font-black font-sans">ROSSO</span>
+        </div>
       </div>
+      
+      <h1 class="font-display text-5xl md:text-7xl leading-none tracking-widest text-rossoNavy">MENU</h1>
+      
+      <!-- Elegant Line Ornament -->
+      <div class="flex items-center justify-center gap-4 w-full max-w-xs py-2">
+        <span class="h-[1px] flex-grow bg-rossoNavy/30"></span>
+        <span class="text-rossoRed text-xs">♥</span>
+        <span class="h-[1px] flex-grow bg-rossoNavy/30"></span>
+      </div>
+      
+      <p class="font-serif italic text-lg md:text-2xl text-rossoNavy/85 tracking-wide">
+        Made with <span class="text-rossoRed font-semibold font-sans not-italic">passion</span>, served with <span class="text-rossoRed font-semibold font-sans not-italic">love</span>.
+      </p>
     </div>
   </section>
   <!-- END: HeroSection -->
@@ -139,19 +188,40 @@
   <!-- BEGIN: SearchAndFilters -->
   <section id="menu-sections" class="max-w-4xl mx-auto -mt-8 relative z-30 px-4">
     <!-- Search Bar -->
-    <div class="bg-white rounded-xl shadow-xl p-1.5 flex items-center border border-gray-100 focus-within:border-rossoRed/30 transition-all">
-      <span class="material-symbols-outlined text-gray-400 pl-3">search</span>
-      <input id="menu-search-input" class="w-full border-none focus:ring-0 text-gray-700 px-3 py-3 text-sm md:text-base placeholder-gray-400 outline-none" placeholder="Search delicious starters, mains, desserts..." type="text">
-      <button onclick="clearSearch()" id="clear-search-btn" class="p-2 text-gray-400 hover:text-rossoRed hidden">
+    <div class="bg-rossoPaper rounded-xl shadow-xl p-1.5 flex items-center border border-rossoNavy/10 focus-within:border-rossoRed/50 transition-all">
+      <span class="material-symbols-outlined text-rossoNavy/50 pl-3">search</span>
+      <input id="menu-search-input" class="w-full bg-transparent border-none focus:ring-0 text-rossoNavy px-3 py-3 text-sm md:text-base placeholder-rossoNavy/40 outline-none font-medium" placeholder="Search beverages, main plates, starters..." type="text">
+      <button onclick="clearSearch()" id="clear-search-btn" class="p-2 text-rossoNavy/40 hover:text-rossoRed hidden">
         <span class="material-symbols-outlined block text-lg">close</span>
       </button>
     </div>
 
-    <!-- Category Filter Slider -->
-    <div class="flex overflow-x-auto gap-4 md:gap-6 py-6 md:py-8 no-scrollbar scroll-smooth items-center text-xs font-semibold uppercase tracking-wider" id="category-slider">
-      <!-- Generated Dynamically -->
-    </div>
   </section>
+
+  <!-- Category Filter Slider (Sticky) -->
+  <div id="category-bar-sticky" class="sticky top-[56px] md:top-[64px] z-30 bg-rossoPaper/95 backdrop-blur-md border-b border-rossoNavy/5 transition-all duration-300 w-full" style="margin-top:0.5rem;">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="relative flex items-center">
+        <!-- Left Arrow -->
+        <button id="cat-arrow-left" onclick="scrollCategories(-1)" class="hidden md:flex absolute left-0 z-10 w-9 h-9 items-center justify-center rounded-full bg-rossoPaper shadow-md border border-rossoNavy/10 text-rossoNavy/60 hover:text-rossoRed hover:border-rossoRed/30 transition-all duration-200 hover:scale-110 active:scale-95 -translate-x-1" aria-label="Scroll categories left">
+          <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+        </button>
+        <!-- Fade left -->
+        <div id="cat-fade-left" class="hidden pointer-events-none absolute left-0 top-0 bottom-0 w-8 z-[5] bg-gradient-to-r from-rossoPaper/95 to-transparent"></div>
+
+        <div class="flex overflow-x-auto gap-3 md:gap-4 px-4 py-3 md:py-4 no-scrollbar scroll-smooth items-center text-xs font-bold uppercase tracking-widest mx-0 md:mx-10" id="category-slider">
+          <!-- Generated Dynamically -->
+        </div>
+
+        <!-- Fade right -->
+        <div id="cat-fade-right" class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 z-[5] bg-gradient-to-l from-rossoPaper/95 to-transparent"></div>
+        <!-- Right Arrow -->
+        <button id="cat-arrow-right" onclick="scrollCategories(1)" class="hidden md:flex absolute right-0 z-10 w-9 h-9 items-center justify-center rounded-full bg-rossoPaper shadow-md border border-rossoNavy/10 text-rossoNavy/60 hover:text-rossoRed hover:border-rossoRed/30 transition-all duration-200 hover:scale-110 active:scale-95 translate-x-1" aria-label="Scroll categories right">
+          <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </div>
   <!-- END: SearchAndFilters -->
 
   <!-- BEGIN: Menu Display -->
@@ -161,58 +231,58 @@
   <!-- END: Menu Display -->
 
   <!-- BEGIN: MainFooter -->
-  <footer id="about-footer" class="bg-rossoDark text-white pt-16 pb-8 border-t border-white/5">
+  <footer id="about-footer" class="bg-rossoNavy text-rossoPaper pt-16 pb-8 border-t border-rossoPaper/10">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12 border-b border-white/10 pb-12 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12 border-b border-rossoPaper/10 pb-12 items-center">
         <!-- Contact -->
         <div class="flex gap-4 items-center justify-start">
-          <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+          <div class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
             <span class="material-symbols-outlined">call</span>
           </div>
           <div>
-            <p class="text-xs text-gray-400 uppercase tracking-widest">Call Us</p>
+            <p class="text-[10px] text-rossoDarkPaper/60 uppercase tracking-widest">Call Us</p>
             <a href="tel:+919645227772" class="font-bold text-sm hover:text-rossoRed transition-colors">+91 96452 27772</a>
           </div>
         </div>
         <!-- Opening Hours -->
         <div class="flex gap-4 items-center justify-start">
-          <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+          <div class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
             <span class="material-symbols-outlined">schedule</span>
           </div>
           <div>
-            <p class="text-xs text-gray-400 uppercase tracking-widest">Opening Hours</p>
+            <p class="text-[10px] text-rossoDarkPaper/60 uppercase tracking-widest">Opening Hours</p>
             <p class="font-bold text-sm">Mon - Sun<br>11:00 AM - 11:00 PM</p>
           </div>
         </div>
         <!-- Central Logo -->
         <div class="flex justify-center md:order-none -order-1">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg border border-white/10">
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg border border-rossoPaper/10">
             <img src="logo.png" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
           </div>
         </div>
         <!-- Location -->
         <div class="flex gap-4 items-center justify-start">
-          <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+          <div class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
             <span class="material-symbols-outlined">pin_drop</span>
           </div>
           <div>
-            <p class="text-xs text-gray-400 uppercase tracking-widest">Our Location</p>
+            <p class="text-[10px] text-rossoDarkPaper/60 uppercase tracking-widest">Our Location</p>
             <p class="font-bold text-sm">55/413-1, 4th Cross Rd, Ramaswamy colony,<br>Panampilly Nagar, Kochi, Kerala 682036</p>
           </div>
         </div>
       </div>
       
-      <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-4 text-xs text-gray-500 uppercase tracking-widest">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-4 text-[10px] text-rossoDarkPaper/50 uppercase tracking-widest">
         <p class="">© 2026 Cafe Rosso Origin. All Rights Reserved.</p>
         <!-- Social Icons -->
         <div class="flex gap-4">
-          <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
+          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
           </a>
-          <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
+          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
           </a>
-          <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
+          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
           </a>
         </div>
@@ -223,38 +293,38 @@
   <!-- END: MainFooter -->
 
   <!-- BEGIN: Sliding Cart Drawer -->
-  <div id="cart-backdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <div id="cart-drawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl cart-drawer translate-x-full flex flex-col">
+  <div id="cart-backdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-black/40 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <div id="cart-drawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 shadow-2xl cart-drawer translate-x-full flex flex-col">
     <!-- Cart Header -->
-    <div class="p-4 border-b flex justify-between items-center bg-rossoDark text-white">
+    <div class="p-4 border-b flex justify-between items-center bg-rossoNavy text-rossoPaper">
       <div class="flex items-center gap-2">
         <span class="material-symbols-outlined text-rossoRed">shopping_basket</span>
-        <h3 class="font-display tracking-widest text-lg">YOUR ORDER</h3>
+        <h3 class="font-display tracking-widest text-base">YOUR ORDER</h3>
       </div>
-      <button onclick="toggleCart(false)" class="p-1 hover:bg-white/10 rounded-full transition-colors">
+      <button onclick="toggleCart(false)" class="p-1 hover:bg-white/10 rounded-full transition-colors text-rossoPaper">
         <span class="material-symbols-outlined block">close</span>
       </button>
     </div>
     <!-- Cart Items List -->
-    <div id="cart-items-container" class="flex-grow overflow-y-auto p-4 space-y-4">
+    <div id="cart-items-container" class="flex-grow overflow-y-auto p-4 space-y-4 text-rossoNavy">
       <!-- Rendered dynamically -->
-      <div class="text-center py-12 text-gray-400">
+      <div class="text-center py-12 text-rossoNavy/40">
         <span class="material-symbols-outlined text-5xl mb-2">restaurant</span>
-        <p class="text-sm">Your order is empty.</p>
+        <p class="text-sm font-semibold">Your order is empty.</p>
         <p class="text-xs mt-1">Add items from the menu to get started!</p>
       </div>
     </div>
     <!-- Cart Footer / Total -->
-    <div class="p-4 border-t bg-gray-50 space-y-4">
-      <div class="flex justify-between items-center text-gray-800">
-        <span class="text-sm font-medium">Subtotal</span>
-        <span id="cart-subtotal" class="font-bold text-lg">₹0</span>
+    <div class="p-4 border-t bg-[#eedccb]/30 space-y-4 text-rossoNavy border-rossoNavy/10">
+      <div class="flex justify-between items-center">
+        <span class="text-sm font-bold tracking-widest uppercase">Subtotal</span>
+        <span id="cart-subtotal" class="font-bold text-xl">₹0</span>
       </div>
-      <p class="text-[11px] text-gray-500 leading-normal">
+      <p class="text-[11px] text-rossoNavy/70 leading-normal font-medium">
         Orders will be sent directly to our restaurant via WhatsApp. We will confirm your delivery/pickup details immediately.
       </p>
-      <button id="whatsapp-checkout-btn" class="w-full bg-rossoRed hover:bg-red-700 text-white py-3 rounded-full flex items-center justify-center gap-2 font-bold transition-all shadow-lg text-sm uppercase tracking-wider">
-        <svg fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <button id="whatsapp-checkout-btn" class="w-full bg-rossoRed hover:bg-red-700 text-white py-3.5 rounded-lg flex items-center justify-center gap-2 font-bold transition-all shadow-md text-xs uppercase tracking-widest">
+        <svg fill="currentColor" class="h-4 w-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
           <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.898 7.898 0 0 0-2.327-5.607zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
         </svg>
         Confirm Order via WhatsApp
@@ -264,7 +334,7 @@
   <!-- END: Sliding Cart Drawer -->
 
   <!-- BEGIN: Floating Action Button (FAB) Cart -->
-  <button id="floating-cart-fab" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-rossoRed text-white p-4 rounded-full shadow-2xl flex items-center justify-center gap-2 hover:bg-red-700 transition-all duration-300 translate-y-24 scale-0">
+  <button id="floating-cart-fab" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-rossoRed text-white p-4.5 rounded-full shadow-2xl flex items-center justify-center gap-2 hover:bg-red-700 transition-all duration-300 translate-y-24 scale-0">
     <span class="material-symbols-outlined block text-2xl">shopping_cart</span>
     <span id="fab-cart-count" class="bg-white text-rossoRed text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
   </button>
@@ -274,65 +344,128 @@
   <script>
     // Menu database
     const CATEGORIES = [
-      { id: 'starters', name: 'Starters', icon: 'restaurant_menu', isGrid: true },
-      { id: 'soups', name: 'Soups', icon: 'soup_kitchen', isGrid: true },
-      { id: 'main_course', name: 'Main Course', icon: 'dinner_dining', isGrid: false }, // Carousel
-      { id: 'biryani', name: 'Biryani', icon: 'rice_bowl', isGrid: true },
-      { id: 'chinese', name: 'Chinese', icon: 'ramen_dining', isGrid: true },
-      { id: 'beverages', name: 'Beverages', icon: 'local_bar', isGrid: true },
+      { id: 'starters_veg', name: 'Starters Veg', icon: 'veg_vegetarian', isGrid: true },
+      { id: 'starters_non_veg', name: 'Starters Non Veg', icon: 'kebab_dining', isGrid: true },
+      { id: 'build_your_own', name: 'Build Your Own', icon: 'construction', isGrid: false },
+      { id: 'main_plates', name: 'Main Plates', icon: 'flatware', isGrid: true },
+      { id: 'pastas', name: 'Pastas', icon: 'dinner_dining', isGrid: true },
+      { id: 'french_toast', name: 'French Toast', icon: 'bakery_dining', isGrid: true },
       { id: 'desserts', name: 'Desserts', icon: 'icecream', isGrid: true },
-      { id: 'juices_shakes', name: 'Juices & Shakes', icon: 'local_cafe', isGrid: true }
+      { id: 'hot_beverages', name: 'Hot Beverages', icon: 'local_cafe', isGrid: true },
+      { id: 'cold_beverages', name: 'Cold Beverages', icon: 'local_bar', isGrid: true },
+      { id: 'milkshakes', name: 'Milkshakes', icon: 'local_drink', isGrid: true }
     ];
 
     const MENU_DATA = {
-      starters: [
-        { id: 's1', name: 'Crispy Chicken Wings', description: 'Crispy fried chicken wings tossed in our signature sauce.', price: 299, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpxOWMZVlTxA9LGkVfPccreJdXErS0RkSWm0dOJHGJGJUsRr8Kw33ytxzxjTX1-VD1mSURAfe6RyCO5jrlJ8t1YWtHjqPbkTiQNTCNax6p6RzI2zCd1kBkOZsYbcsfwpTr-fQj-ibj5dc5p7vUPwj7iXSdynmhCn3K0-g6cA1Jww8ABH_7zy88wrtPLEmWUkWmKMTdO3lleY6024azaNWqJC8Cd1UNWoVo3dDbz0Znig1aHRZdDk9c3VT1cOdpXj2SCqPwG7p2JTw', bestseller: true },
-        { id: 's2', name: 'Peri Peri French Fries', description: 'Crispy fries tossed in peri peri spice and herbs.', price: 199, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDlelv49faIL9gSZXACS2HyY-tcblN3VwjjZ1hhHgwoGDpsPG4aMcw-lpesWR607sYRvuDW4ZrIN6Z1Uw2-o4r4eKHIfMPCK4OloSpUyghJtNaTq-cGfm5TvvQERMcuYfnHbDdO8iDefC1tIazPRj6cD5K25CEG13oxK0eczzLWqG-fenS5JOutf98IxE8JAlivbeeFZQQKqu5BJDy9LzzOyk7WP_0JepsHC9VG4F0zmIff0zv8rq--oayX2o8_OAkyBAmnl1GYe90', bestseller: false },
-        { id: 's3', name: 'Chicken Tikka', description: 'Classic chicken tikka marinated in yogurt and spices.', price: 349, image: 'chicken_tikka.png', bestseller: true },
-        { id: 's4', name: 'Paneer Tikka', description: 'Cottage cheese cubes marinated in spices and grilled to perfection.', price: 299, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAU5TvgTmIF-uyVumN7eHDbApj6BNEfyst2YD6E0uBgUexyCUUlDQH2nBB6hmUGuUV7uilRa668pTGduPwwj6N20wH30ZrN9UClyYDQ9OYG-xQib_VMIQHdJmdafY7e6TT7Fo4bEGDK4A-SfOoOaZRNwRdwfzVysxSQDQhSVQI8ARNLK3t71bA0MZiGRLZ3zGa_hzvNuadW6fC67XsT5Rr9MnZQ2_Az8lqt6HbagJbt_b5XnbukcttpsAhVVGk3rl3NPrV6N34pizg', bestseller: false },
-        { id: 's5', name: 'Loaded Nachos', description: 'Nachos topped with cheese sauce, salsa, jalapeños & beans.', price: 249, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDD9WQH8xEjTZ6gAVTxlLv9AnwS1Zegs0P5Z96TrXTagHnpAfRnrf1yTaqS5gEco-8U-fej03Odm7PYWdMH70KHmkqKdenQ9ldUX4yKAPRXVTNorJAaGDV2CNNEw5pxsFt6sdPJx4npZTk5TaGb_jIw7PxQjyMibKIRyvBxN3e0_PsXZTKp7dldDVR0a5E8668uZ2O9OG1nSgT5-2aoM0QAaR2smildeSUGiGSBY_KeQgslMc2CnonHbkETtxekE58vk0TvcYhn8l8', bestseller: false },
-        { id: 's6', name: 'Veg Spring Rolls', description: 'Crispy veg rolls served with schezwan dipping sauce.', price: 199, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDDTiWeS2JchtDh8cUk8scASCr_8XXoAfwajgUM--W8veBVojWEOmpdBfNSacoKY08q7y8wAYrNzJL15gL2UjFc3lTKKT3lALe9n7C2NSjOa339KZraYRD37q68cWeI1VrGRseYvjp8sQXsi_m2Zb8pyssUCd194br0JJrJ4XlRL5qFMsgCjrHDYhNVLinEHndMpXqRGYYxPnFWDs56dr800_Zbjopvx78dEtC-SMnzDX5PuFFYuhdMQJV3erw5NUuw92TRdWlZ25U', bestseller: false },
-        { id: 's7', name: 'Burrata with Heirloom Tomatoes', description: 'Creamy burrata cheese, vibrant heirloom tomatoes, aged balsamic glaze, and fresh basil pearls.', price: 425, image: 'https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&q=80&w=400', bestseller: true },
-        { id: 's8', name: 'Truffle Arancini', description: 'Crispy risotto balls infused with black truffle and mozzarella, served with a roasted garlic aioli.', price: 389, image: 'https://images.unsplash.com/photo-1633436374961-09b92742047b?auto=format&fit=crop&q=80&w=400', bestseller: false },
-        { id: 's9', name: 'Garlic Butter Prawns', description: 'Succulent prawns sautéed in a rich garlic herb butter with a hint of lemon and chili flakes.', price: 549, image: 'https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      build_your_own: {
+        step1: [
+          { name: 'Rice Bowl', description: 'Lime Cilantro Rice, Fajita Veggies, Pinto Beans, Sour Cream, White Cheddar Cheese, Farm Fresh Lettuce', image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=400' },
+          { name: 'Burrito', description: 'Fajita Veggies, Pinto Beans, Sour Cream, White Cheddar Cheese, Farm Fresh Lettuce', image: 'https://images.unsplash.com/photo-1584208632869-05fa2b2a5934?auto=format&fit=crop&q=80&w=400' },
+          { name: 'Quesadilla', description: 'Grilled tortilla filled with white cheddar cheese and your selected protein.', image: 'https://images.unsplash.com/photo-1618040996337-56904b7850b9?auto=format&fit=crop&q=80&w=400' },
+          { name: 'Fajita Salad', description: 'Fajita Veggies, Pinto Beans, Sour Cream, White Cheddar Cheese, Farm Fresh Lettuce', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=400' }
+        ],
+        step2: [
+          { name: 'Vegetarian Paneer', price: 270 },
+          { name: 'Chipotle Marinated Chicken', price: 330 },
+          { name: 'Dishoom Butter Chicken', price: 330 },
+          { name: 'Chipotle Marinated Shrimp', price: 360 },
+          { name: 'Chili Con Carne', price: 390 },
+          { name: 'Spicy Beef Barbacoa', price: 420 }
+        ],
+        step3: [
+          { name: 'Guacamole', price: 130 },
+          { name: 'Traditional Salsa', price: 60 },
+          { name: 'Chipotle Salsa', price: 60 },
+          { name: 'Roasted Corn', price: 50 },
+          { name: 'Chipotle Ranch Dressing', price: 50 },
+          { name: 'Dip of the Day', price: 50 }
+        ],
+        step4: [
+          { name: 'Heart Beats', price: 200 },
+          { name: 'Rosso Refresher', price: 280 },
+          { name: 'Detox Green', price: 200 },
+          { name: 'Minty Mind', price: 200 },
+          { name: 'Earth Sky', price: 200 },
+          { name: 'Immunity Rockets', price: 200 },
+          { name: 'Citrus Glow', price: 250 }
+        ]
+      },
+      starters_veg: [
+        { id: 'sv1', name: 'French Fries with Salt and Vinegar', description: 'Hand-cut potatoes double fried in oil, delivering an extra crispy texture and deep, rich flavor.', price: 180, image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'sv2', name: 'Gunpowder Tallow Fries', description: 'Crispy hand cut fries tossed in our signature spiked gunpowder blend for a bold and smoky kick.', price: 180, image: 'https://images.unsplash.com/photo-1518013431117-eb1465fa5752?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'sv3', name: 'Roasted Mushrooms with Pesto', description: 'Oven-roasted mushrooms stuffed with aromatic basil pesto and melted Parmesan, delivering earthy and herbaceous flavors.', price: 220, image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'sv4', name: 'Paneer Zucchini Grilled', description: 'Soft and succulent cubes of paneer wrapped in zucchini and grilled to perfection. Served with a house special sauce.', price: 250, image: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'sv5', name: 'Melt in Pope', description: 'Rice buttery creamy potatoes mashed into bite sized balls and stuffed with cheese. Served with a house special sauce.', price: 250, image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'sv6', name: 'Animal Fries Paneer', description: 'Crispy golden fries loaded with melted cheese, sweet caramelized onions, and our signature tangy secret sauce. A rich, savoury, and undeniably indulgent treat.', price: 280, image: 'https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&q=80&w=400', veg: true }
       ],
-      soups: [
-        { id: 'sp1', name: 'Tomato Basil Soup', description: 'Rich tomato soup infused with fresh basil and roasted garlic, served with herb croutons.', price: 179, image: 'tomato_soup.png', bestseller: false },
-        { id: 'sp2', name: 'Hot & Sour Chicken Soup', description: 'Spicy and tangy soup with chicken slices, wood-ear mushrooms, and bamboo shoots.', price: 199, image: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&q=80&w=400', bestseller: true }
+      starters_non_veg: [
+        { id: 'sn1', name: 'Tallow Fries', description: 'Hand-cut potatoes fried in traditional rendered fat, delivering an extra crispy texture and deep, rich flavor.', price: 180, image: 'https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn2', name: 'Gunpowder Tallow Fries', description: 'Crispy tallow fries tossed in our signature spiked gunpowder blend for a bold and smoky kick.', price: 180, image: 'https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn3', name: 'BBQ Buffalo Chicken Wings', description: 'Perfectly fried chicken wings glazed in our house-made BBQ buffalo sauce, balancing heat, sweetness, and tang.', price: 360, image: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn4', name: 'Buttery Parmesan Wings', description: 'Golden fried wings coated in a rich garlic butter sauce and finished generously with Parmesan cheese.', price: 420, image: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn5', name: 'Gunpowder Chicken Tenders', description: 'Crispy fried chicken tenders, tossed in our signature spiced gunpowder for extra heat. Served with a sweet and spicy dip.', price: 300, image: 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn6', name: 'Crispy Fried Chicken Tenders', description: 'Deep fried chicken tenders served with a mayo dip. Perfect for your little ones.', price: 300, image: 'https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn7', name: 'Kaya Toast (Seasonal)', description: 'Traditional Singaporean breakfast favourite. Crispy toasted bread slathered with sweet, fragrant pandan jam and topped with thick slices of cold, salted butter.', price: 210, image: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn8', name: 'Animal Fries Chicken', description: 'Crispy golden fries loaded with melted cheese, sweet caramelized onions, and our signature tangy secret sauce. A rich, savoury, and undeniably indulgent treat.', price: 330, image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'sn9', name: 'Animal Fries Beef', description: 'Crispy golden fries loaded with melted cheese, sweet caramelized onions, and our signature tangy secret sauce. A rich, savoury, and undeniably indulgent treat.', price: 350, image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&q=80&w=400', veg: false }
       ],
-      main_course: [
-        { id: 'm1', name: 'Butter Chicken', description: 'Tender chicken cooked in rich buttery tomato and cashew gravy.', price: 399, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAwH8543phWWyu45dMG60jGtkJqvqCdHRtNfMY2oReAJlxNfr1-0XuAleB6EoBAL6QGr5gHrPT1VVYiq9oTFm2fP_mR4KmhXN6i5VvXBr3R2PlAzvKFjS8cM3BsLT6pkO_m7m-dWhVAM0M97i9K8iW5eT5uYrVsfmCqF_AHx2EbFKxlyhunya1AMACh249ZXCQtNiaePFnPfGKh0p1foRjl1lgX1I1nMsBA7nXW54wxNyB9QGKjilsvdYr22-MjOxlY6IHYwfr8Pek', bestseller: true },
-        { id: 'm2', name: 'Paneer Butter Masala', description: 'Cottage cheese cooked in creamy tomato and butter gravy.', price: 349, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuADkqNipsBLOFsa81ByeJP_KJobYgZhVmt656Os7E2-sS8bqAw-crw3Oh1TZ6TDRfIToKv6RFgmuhwWv-HU6Og3XkDnGsRxLoBwPrd2OVn3sdwQ8D7nmc15Wt730OrCif6CQXMkVmhrPJ0zDU5uHRXsEWxXTib9Ig07QQDLx0r_7JrAbbhw7UM3eEB87Osl_HgB0CMDzrzxXvMkdz2Zch6V6Nze_PYVgNp88OTav4oinP7LxDYH07YVprmiH7LDLzv_uvcypg8JzTg', bestseller: false },
-        { id: 'm3', name: 'Thai Green Curry (Veg)', description: 'Exotic Thai curry with broccoli, babycorn, and bell peppers in green curry sauce.', price: 329, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBsjoXL5tJnszoMeA1Oojqxi9Nga0stHM7-j8Iqj8fGGdAqT5M034emfNix4RWbxH7z_t2KnZY3viIRKnX7Id43-U-yb65Zj4tiYh7moPgt5d6sND-utnUD4Rn8gJb80otyia0WNEZH-lorBXMTP0VvgNYyXAVXvp03ts4R_ancfGLM7Vj-BiHfOilzLKJ7vktYM3-zgTIf3z9ZNiJ-OvEm2eGVZDeJ0FPJjI6p862oaZ7aXxAtseUzwBz2XdOZGPv_3PtqCJ4PPE8', bestseller: false },
-        { id: 'm4', name: 'Dal Makhani', description: 'Slow cooked black lentils in creamy buttery tomato gravy.', price: 279, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAF2GFAIBS4o8Dhhz8ctZMH21zEWk6UYp3t_UFGpCHz5gnMdDwrtRRPvkAl6FsbO7uSYktNdHglpn_pCQFh_Se43-627BCr9eKhZpk9DGTCjdUFrjGdfG2wLWXgSTlSbQb4Z74R8QN5Oi7pDPKhCMS_8yfVDLjzFdzifmxACMGf5uBisi4dWpOe1WBZX00r9gig6aenu1OpWZmzNWPCG2gSlDyqFsXC7rb8IGBm3Fsz6u78PjwlcH_3ey444ZaKYjzM59iLvkZTuzo', bestseller: false }
+      main_plates: [
+        { id: 'mp1', name: 'Classic French Beef Steak', description: 'Premium beef tenderloin grilled to your preference, served with rich red wine jus, creamy mashed potatoes, and butter-poached vegetables.', price: 410, image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'mp2', name: 'Grilled Sea Bass Steak', description: 'Pan-sear salmon finished in herb butter, served with a delicate cauliflower and leek mash, complemented by parsley purée.', price: 450, image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'mp3', name: 'Chicken Roulade', description: 'Juicy chicken roulade stuffed with herbs and cheese, served with a side of creamy mashed potatoes.', price: 420, image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'mp4', name: 'Parmesan Creamy Delight', description: 'Juicy and succulent grilled chicken breast topped with a creamy parmesan sauce. Served with house rice or mashed potato with buttery grilled veggies.', price: 450, image: 'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'mp5', name: 'Cajun Blackened Chicken with Dirty Rice', description: 'A chef special Cajun classic. Tender chicken breast grilled in a bold blend of cajun spices and grilled until deeply charred. It is served over a savoury, rich seasoned Louisiana-style rice cooked with ground meat, bell peppers, onions and other spices.', price: 450, image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&q=80&w=400', veg: false },
+        { id: 'mp6', name: 'Thai Pad Kra Pao Chicken/Beef', description: 'The ultimate Thai comfort food. Your choice of minced chicken or beef, wok-tossed with fresh holy basil, garlic, and bird\'s eye chillies in a savory umami sauce. Served over steamed jasmine rice and crowned with a crispy Thai-style fried egg.', price: 380, image: 'https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?auto=format&fit=crop&q=80&w=400', veg: false, isPricedOptions: true, priceOptions: [{ name: 'Chicken', price: 380 }, { name: 'Beef', price: 420 }] },
+        { id: 'mp7', name: 'Tandoori Paneer Steak', description: 'Grilled paneer infused with bold tandoori flavors, served with buttery gravy, pickled salad, and refreshing mint salsa.', price: 380, image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&q=80&w=400', veg: true }
       ],
-      biryani: [
-        { id: 'b1', name: 'Hyderabadi Chicken Biryani', description: 'Fragrant basmati rice layered with juicy chicken, spices, and saffron.', price: 379, image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&q=80&w=400', bestseller: true },
-        { id: 'b2', name: 'Nizami Veg Biryani', description: 'Traditional slow-cooked vegetable biryani served with mirchi ka salan.', price: 299, image: 'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      pastas: [
+        { id: 'pa1', name: 'Fettuccini Ala Fungi', description: 'Fresh fettuccine tossed in a rich, velvety cream sauce with pan-roasted mixed wild mushrooms, garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 290, image: 'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&q=80&w=400', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] },
+        { id: 'pa2', name: 'Fettuccini Ala Rosso', description: 'Fresh fettuccine tossed in a rich, velvety pink sauce with pan-roasted garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 260, image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&q=80&w=400', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] },
+        { id: 'pa3', name: 'Creamy Pesto Fettuccini', description: 'Fresh fettuccine tossed in a rich, creamy pesto sauce with pan-roasted garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 260, image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&q=80&w=400', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] }
       ],
-      chinese: [
-        { id: 'c1', name: 'Schezwan Noodles', description: 'Fiery stir-fried noodles tossed with fresh veggies and bold Schezwan sauce.', price: 249, image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&q=80&w=400', bestseller: false },
-        { id: 'c2', name: 'Chilli Chicken', description: 'Crispy chicken chunks tossed in a sweet, spicy, and tangy chilli sauce.', price: 299, image: 'https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&q=80&w=400', bestseller: true }
-      ],
-      beverages: [
-        { id: 'bev1', name: 'Iced Latte', description: 'Double shot of espresso poured over ice and fresh milk.', price: 169, image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=400', bestseller: false },
-        { id: 'bev2', name: 'Mint Mojito', description: 'Refreshing blend of lime, fresh mint leaves, sugar, and club soda.', price: 149, image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      french_toast: [
+        { id: 'ft1', name: 'Korean Chocolate Toast', description: 'A Korean style toast topped with rich and silky chocolate sauce. A mind blowing twist on the classic French toast.', price: 250, image: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ft2', name: 'Korean Pistachio Toast', description: 'A Korean style toast topped with rich and silky Pistachio sauce. Service with whipped cream and toppings.', price: 250, image: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=400', veg: true }
       ],
       desserts: [
-        { id: 'd1', name: 'Sizzling Brownie', description: 'Warm chocolate brownie served on a sizzler plate with vanilla ice cream and hot fudge.', price: 249, image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=400', bestseller: true },
-        { id: 'd2', name: 'Tiramisu Rosso', description: 'Classic Italian dessert with espresso-soaked ladyfingers and mascarpone cream.', price: 299, image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&q=80&w=400', bestseller: false }
+        { id: 'de1', name: 'Grape Spooty', description: 'Soft vanilla sponge layered with red wine grape compote, served warm with a scoop of ice cream.', price: 250, image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'de2', name: 'Rosso Cheesecake', description: 'Decadent, creamy house-made cheesecake served with a side of house chocolate sauce.', price: 250, image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'de3', name: 'Silky Cookie Dough', description: 'Warm and creamy edible cookie dough, rich chocolate chips, served with a drizzle of chocolate sauce and vanilla ice cream.', price: 280, image: 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'de4', name: 'Chocolate Souffle', description: 'Baked-to-order, this delicate French classic rises high above the ramekin. Features an airy, cloud-like centre and a rich, decadent finish. Served with a dusting of powdered sugar and vanilla ice cream.', price: 300, image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'de5', name: 'Rich Chocolate Cake', description: 'A deeply rich chocolate cake offering a velvety, melt-in-your-mouth crumb. Served with an elegant and warm chocolate sauce.', price: 250, image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400', veg: true }
       ],
-      juices_shakes: [
-        { id: 'j1', name: 'Fresh Watermelon Juice', description: 'Cold-pressed local watermelons with a hint of mint.', price: 189, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDe7FJLpwobZ04Z31oc6hT4Dlj7LnTN3z0Jt4KKyPC3zTECEOrXo8InU-etF133FbQA91EGB0E27j85hUNQfRkVhz7TX6ZwjpQ5DlyxPiBaJ3HoJePHJSCat7No2N2iSx83ejk6lhbJAjCLm0kb-3l6u2Ph50jjcV_f-3-M-PYb3VQIEahfg6ndd5R8LjhZDNZaSbnbpMpRX6lENQgFFTR4-l_lvWUsBOzkxVsLCX3CfdyqJQMWKL7_ODlFUKuRA3OKEk6bg_t3eDY', bestseller: false },
-        { id: 'j2', name: 'Classic Chocolate Shake', description: 'Rich Belgian chocolate blended with creamy vanilla gelato.', price: 249, image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=400', bestseller: false },
-        { id: 'j3', name: 'Alphonso Mango Smoothie', description: 'Seasonal premium mangoes blended with Greek yogurt.', price: 229, image: 'mango_smoothie.png', bestseller: false },
-        { id: 'j4', name: 'Strawberry Bliss Shake', description: 'Fresh garden strawberries with whipped cream and white chocolate shavings.', price: 269, image: 'https://images.unsplash.com/photo-1553174241-0b28d763cafa?auto=format&fit=crop&q=80&w=400', bestseller: false }
+      hot_beverages: [
+        { id: 'hb1', name: 'Espresso', description: 'A concentrated shot of rich, dark-roasted coffee with a thick, golden crema.', price: 80, image: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'hb2', name: 'Americano', description: 'Espresso lengthened with hot water for a smooth, lighter-bodied cup.', price: 90, image: 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'hb3', name: 'Cappuccino', description: 'Equal parts espresso, steamed milk and airy foam, dusted with cocoa.', price: 110, image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'hb4', name: 'Café Latte', description: 'Espresso layered with silky steamed milk for a mellow, comforting sip.', price: 100, image: 'https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'hb5', name: 'Café Mocha', description: 'Espresso and steamed milk meet melted chocolate for a cosy, dessert-like cup.', price: 100, image: 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&q=80&w=400', veg: true }
+      ],
+      cold_beverages: [
+        { id: 'cb1', name: 'Iced Café Latte', description: 'Chilled espresso and cold milk poured over ice, smooth and refreshing.', price: 140, image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'cb2', name: 'Iced Caramel Macchiato', description: 'Espresso marked over vanilla milk and ice, finished with caramel drizzle.', price: 180, image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'cb3', name: 'Frappé de Oreo', description: 'A thick, blended Oreo and coffee frappé crowned with whipped cream.', price: 180, image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'cb4', name: 'Matcha Latte', description: 'Stone-ground Japanese green tea whisked with chilled milk, earthy and smooth.', price: 180, image: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'cb5', name: 'Brown Sugar Shaken Coffee', description: 'Cold-shaken espresso swirled with brown sugar syrup over milk and ice.', price: 180, image: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'cb6', name: 'Cold Coffee', description: 'Our classic cold coffee, blended smooth and lightly sweetened.', price: 140, image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&q=80&w=400', veg: true }
+      ],
+      milkshakes: [
+        { id: 'ms1', name: 'Chocolate Freak Shake', description: 'An indulgent chocolate shake piled high with toppings and a chocolate drizzle.', price: 210, image: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms2', name: 'Nutella Shake', description: 'Creamy milkshake blended with Nutella for a hazelnut-chocolate hit.', price: 210, image: 'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms3', name: 'Nutty Glow', description: 'A nutty, malt-kissed shake with a smooth, toasted finish.', price: 190, image: 'https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms4', name: 'Mango Shake', description: 'Sweet, ripe mango blended thick and chilled — a tropical classic.', price: 190, image: 'https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms5', name: 'Cold Milo Shake', description: 'Malted Milo blended cold and frothy, nostalgic in every sip.', price: 210, image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms6', name: 'Avocado Kiwi Shake', description: 'Creamy avocado and tangy kiwi blended into a fresh, vibrant shake.', price: 220, image: 'https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms7', name: 'Peanut Choco Shake', description: 'Roasted peanut butter and chocolate blended into a rich, nutty shake.', price: 190, image: 'https://images.unsplash.com/photo-1553787499-6f9133860278?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms8', name: 'Chocolate Shake', description: 'A timeless, creamy chocolate milkshake, simple and satisfying.', price: 180, image: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms9', name: 'Melon Magic Shake', description: 'Chilled musk melon blended smooth for a light, fragrant sip.', price: 190, image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms10', name: 'Velvet Bloom Shake', description: 'A delicately sweet, smooth house blend with a soft floral finish.', price: 190, image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400', veg: true }
       ]
     };
 
     // State
     let cart = {};
-    let currentCategory = 'starters';
+    let currentCategory = 'starters_veg';
     let searchQuery = '';
 
     // Elements
@@ -351,11 +484,13 @@
 
     // Initialize UI
     function init() {
+      initSelections();
       renderCategories();
       renderMenu();
       setupSearch();
       setupCartCheckout();
       updateCartUI();
+      setupDragToScroll();
     }
 
     // Render category selectors
@@ -364,25 +499,93 @@
         const isActive = cat.id === currentCategory;
         const activeClass = isActive 
           ? 'text-rossoRed' 
-          : 'text-gray-400 hover:text-rossoRed';
+          : 'text-rossoNavy/60 hover:text-rossoRed';
         const buttonBg = isActive 
-          ? 'bg-rossoRed text-white shadow-lg scale-105' 
-          : 'bg-white border border-gray-100 shadow-sm text-gray-500';
+          ? 'bg-rossoRed text-white shadow-md scale-105' 
+          : 'bg-[#ebdccb]/30 border border-rossoNavy/10 text-rossoNavy';
+
+        let materialIcon = 'restaurant_menu';
+        if (cat.icon === 'veg_vegetarian') {
+          return `
+            <button onclick="selectCategory('${cat.id}')" id="cat-btn-${cat.id}" class="flex flex-col items-center gap-1.5 min-w-fit transition-all duration-300 group ${activeClass}">
+              <div class="px-5 py-2.5 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${buttonBg} gap-1">
+                <span class="w-3.5 h-3.5 border border-green-600 flex items-center justify-center rounded-[2px] p-[2px]"><span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span></span>
+                <span class="text-[10px] font-bold tracking-widest">${cat.name}</span>
+              </div>
+            </button>
+          `;
+        }
 
         return `
-          <button onclick="selectCategory('${cat.id}')" id="cat-btn-${cat.id}" class="flex flex-col items-center gap-2 min-w-fit transition-all duration-300 group ${activeClass}">
-            <div class="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${buttonBg}">
-              <span class="material-symbols-outlined block text-2xl">${cat.icon}</span>
+          <button onclick="selectCategory('${cat.id}')" id="cat-btn-${cat.id}" class="flex flex-col items-center gap-1.5 min-w-fit transition-all duration-300 group ${activeClass}">
+            <div class="px-5 py-2.5 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 ${buttonBg} gap-1.5">
+              <span class="material-symbols-outlined block text-[16px]">${cat.icon}</span>
+              <span class="text-[10px] font-bold tracking-widest">${cat.name}</span>
             </div>
-            <span class="text-[11px] font-bold">${cat.name}</span>
           </button>
         `;
       }).join('');
+      // After rendering, update arrow visibility
+      updateCategoryArrows();
     }
+
+    // Scroll the category slider by one "page" in the given direction
+    function scrollCategories(direction) {
+      const slider = document.getElementById('category-slider');
+      const scrollAmount = slider.clientWidth * 0.65;
+      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+
+    // Show/hide arrow buttons and fade hints based on scroll position
+    function updateCategoryArrows() {
+      const slider = document.getElementById('category-slider');
+      const arrowLeft = document.getElementById('cat-arrow-left');
+      const arrowRight = document.getElementById('cat-arrow-right');
+      const fadeLeft = document.getElementById('cat-fade-left');
+      const fadeRight = document.getElementById('cat-fade-right');
+      if (!slider || !arrowLeft || !arrowRight) return;
+
+      const scrollLeft = slider.scrollLeft;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      const canScrollLeft = scrollLeft > 4;
+      const canScrollRight = maxScroll - scrollLeft > 4;
+
+      // Desktop arrows
+      arrowLeft.classList.toggle('md:flex', canScrollLeft);
+      arrowLeft.classList.toggle('hidden', !canScrollLeft);
+      arrowRight.classList.toggle('md:flex', canScrollRight);
+      arrowRight.classList.toggle('hidden', !canScrollRight);
+
+      // Mobile fade hints (always shown on mobile if scrollable)
+      if (fadeLeft) {
+        fadeLeft.classList.toggle('hidden', !canScrollLeft);
+        fadeLeft.classList.toggle('block', canScrollLeft);
+      }
+      if (fadeRight) {
+        fadeRight.classList.toggle('hidden', !canScrollRight);
+        fadeRight.classList.toggle('block', canScrollRight);
+      }
+    }
+
+    // Attach scroll listener to slider for arrow updates
+    (function setupCategoryScroll() {
+      const slider = document.getElementById('category-slider');
+      if (slider) {
+        slider.addEventListener('scroll', updateCategoryArrows, { passive: true });
+        // Also update on window resize
+        window.addEventListener('resize', updateCategoryArrows, { passive: true });
+      }
+    })();
 
     function selectCategory(catId) {
       currentCategory = catId;
       renderCategories();
+
+      // Auto-scroll the active category button into view in the slider
+      const activeBtn = document.getElementById(`cat-btn-${catId}`);
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
       
       // Clear search so they can browse the full category
       if (searchQuery) {
@@ -396,12 +599,13 @@
       // Smooth scroll to the menu section
       const targetElement = document.getElementById(`section-${catId}`);
       if (targetElement) {
-        const offset = 120; // sticky header + category bar height approximate
+        const stickyBar = document.getElementById('category-bar-sticky');
+        const headerHeight = window.innerWidth >= 768 ? 64 : 56;
+        const offset = (stickyBar ? stickyBar.offsetHeight : 50) + headerHeight + 20;
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = targetElement.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
         const offsetPosition = elementPosition - offset;
-
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
@@ -409,11 +613,151 @@
       }
     }
 
+    // Setup drag-to-scroll functionality for the category slider
+    function setupDragToScroll() {
+      const slider = document.getElementById('category-slider');
+      if (!slider) return;
+
+      let isDown = false;
+      let startX;
+      let scrollLeftVal;
+      let isDragging = false;
+
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        isDragging = false;
+        slider.classList.add('grabbing');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeftVal = slider.scrollLeft;
+      });
+
+      slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('grabbing');
+      });
+
+      slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('grabbing');
+      });
+
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5; // Drag speed multiplier
+        if (Math.abs(x - startX) > 5) {
+          isDragging = true;
+        }
+        slider.scrollLeft = scrollLeftVal - walk;
+      });
+
+      // Prevent button clicks if the user was dragging
+      slider.addEventListener('click', (e) => {
+        if (isDragging) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true); // Capture phase is critical to intercept inline onclick handlers!
+    }
+
     // Render the complete menu based on current filter / query
     function renderMenu() {
       let html = '';
 
       CATEGORIES.forEach(category => {
+        // Handle special Build Your Own step presentation layout
+        if (category.id === 'build_your_own') {
+          const byoData = MENU_DATA.build_your_own;
+          
+          html += `
+            <div id="section-${category.id}" class="section-divider scroll-mt-24 fade-in-item">
+              <div class="inline-block bg-[#f4ebe1] px-6 relative z-10">
+                <div class="flex flex-col items-center">
+                  <span class="text-rossoNavy font-serif italic text-xs tracking-widest mb-1">Café Rosso Custom</span>
+                  <h3 class="font-display text-2xl tracking-widest text-rossoNavy font-bold uppercase">${category.name}</h3>
+                  <span class="text-rossoRed text-xs mt-0.5">♥</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-12 mb-16 max-w-4xl mx-auto">
+              <!-- STEP 1: CHOOSE A BASE -->
+              <div class="bg-[#ebdccb]/15 p-6 rounded-xl border border-rossoNavy/10">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="bg-rossoRed text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wider">Step 01</span>
+                  <h4 class="font-display text-lg font-bold text-rossoNavy uppercase tracking-wider">Choose a Base</h4>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  ${byoData.step1.map(base => `
+                    <div class="bg-white/70 p-4 rounded-lg border border-rossoNavy/5 hover:border-rossoRed/30 transition-all duration-300 flex gap-4">
+                      <div class="w-16 h-16 rounded-md overflow-hidden flex-shrink-0 border border-rossoNavy/5">
+                        <img src="${base.image}" alt="${base.name}" class="w-full h-full object-cover">
+                      </div>
+                      <div>
+                        <h5 class="font-display text-sm font-bold text-rossoNavy leading-tight">${base.name}</h5>
+                        <p class="text-xs text-rossoNavy/75 mt-1 font-serif italic leading-relaxed">${base.description}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- STEP 2: CHOOSE YOUR PROTEIN -->
+              <div class="bg-[#ebdccb]/15 p-6 rounded-xl border border-rossoNavy/10">
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="bg-rossoRed text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wider">Step 02</span>
+                  <h4 class="font-display text-lg font-bold text-rossoNavy uppercase tracking-wider">Choose Your Protein</h4>
+                </div>
+                <div class="space-y-3 font-medium text-sm text-rossoNavy">
+                  ${byoData.step2.map(prot => `
+                    <div class="flex justify-between items-center py-1">
+                      <span class="font-display font-semibold tracking-wide text-xs md:text-sm uppercase">${prot.name}</span>
+                      <span class="flex-grow border-b border-dotted border-rossoNavy/35 mx-3 mt-2"></span>
+                      <span class="font-sans font-bold text-xs md:text-sm">₹${prot.price}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- STEP 3: ADD YOUR SIDES -->
+              <div class="bg-[#ebdccb]/15 p-6 rounded-xl border border-rossoNavy/10">
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="bg-rossoRed text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wider">Step 03</span>
+                  <h4 class="font-display text-lg font-bold text-rossoNavy uppercase tracking-wider">Add Your Sides</h4>
+                </div>
+                <div class="space-y-3 font-medium text-sm text-rossoNavy">
+                  ${byoData.step3.map(side => `
+                    <div class="flex justify-between items-center py-1">
+                      <span class="font-display font-semibold tracking-wide text-xs md:text-sm uppercase">${side.name}</span>
+                      <span class="flex-grow border-b border-dotted border-rossoNavy/35 mx-3 mt-2"></span>
+                      <span class="font-sans font-bold text-xs md:text-sm">₹${side.price}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- STEP 4: GRAB A DRINK -->
+              <div class="bg-[#ebdccb]/15 p-6 rounded-xl border border-rossoNavy/10">
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="bg-rossoRed text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wider">Step 04</span>
+                  <h4 class="font-display text-lg font-bold text-rossoNavy uppercase tracking-wider">Grab a Drink</h4>
+                </div>
+                <div class="space-y-3 font-medium text-sm text-rossoNavy">
+                  ${byoData.step4.map(drink => `
+                    <div class="flex justify-between items-center py-1">
+                      <span class="font-display font-semibold tracking-wide text-xs md:text-sm uppercase">${drink.name}</span>
+                      <span class="flex-grow border-b border-dotted border-rossoNavy/35 mx-3 mt-2"></span>
+                      <span class="font-sans font-bold text-xs md:text-sm">₹${drink.price}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
         const items = MENU_DATA[category.id] || [];
         // Filter items if searching
         const filteredItems = items.filter(item => 
@@ -426,70 +770,34 @@
           return;
         }
 
-        // Section header
+        // Decorative printed menu header with double lines and elegant center heart ornament
         html += `
-          <div id="section-${category.id}" class="section-divider scroll-mt-32 fade-in-item">
-            <div class="inline-block bg-gray-50 px-6 relative z-10">
+          <div id="section-${category.id}" class="section-divider scroll-mt-24 fade-in-item">
+            <div class="inline-block bg-[#f4ebe1] px-6 relative z-10">
               <div class="flex flex-col items-center">
-                <span class="material-symbols-outlined text-rossoRed mb-1 text-2xl">${category.icon}</span>
-                <h3 class="font-display text-3xl tracking-widest text-rossoDark uppercase">${category.name}</h3>
+                <span class="text-rossoNavy font-serif italic text-xs tracking-widest mb-1">Café Rosso</span>
+                <h3 class="font-display text-2xl tracking-widest text-rossoNavy font-bold uppercase">${category.name}</h3>
+                <span class="text-rossoRed text-xs mt-0.5">♥</span>
               </div>
             </div>
           </div>
         `;
 
-        if (category.isGrid) {
-          // Standard Grid View
-          html += `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              ${filteredItems.map(item => renderItemCard(item, category.id)).join('')}
-            </div>
-          `;
-        } else {
-          // Carousel View (Main Course)
-          html += `
-            <div class="relative group mb-12">
-              <!-- Slider Arrows -->
-              <button onclick="slideCarousel('${category.id}', -1)" class="absolute -left-3 md:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-gray-400 hover:text-rossoRed hover:border-rossoRed/50 transition-all z-20">
-                <span class="material-symbols-outlined block">arrow_back_ios_new</span>
-              </button>
-              <button onclick="slideCarousel('${category.id}', 1)" class="absolute -right-3 md:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-gray-400 hover:text-rossoRed hover:border-rossoRed/50 transition-all z-20">
-                <span class="material-symbols-outlined block">arrow_forward_ios</span>
-              </button>
-              
-              <!-- Slider Track Container -->
-              <div id="carousel-${category.id}" class="flex overflow-x-auto gap-6 no-scrollbar scroll-smooth snap-x snap-mandatory py-4">
-                ${filteredItems.map(item => `
-                  <div class="snap-start snap-always shrink-0 w-80 md:w-72 bg-white rounded-2xl overflow-hidden card-shadow border border-gray-100 group transition-all duration-300 hover:border-rossoRed/20">
-                    <div class="relative h-48 overflow-hidden">
-                      <img alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${item.image}">
-                      ${item.bestseller ? `<span class="absolute top-3 left-3 bg-rossoRed text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider shadow-md">Bestseller</span>` : ''}
-                    </div>
-                    <div class="p-4 flex flex-col justify-between h-44">
-                      <div>
-                        <h4 class="font-bold text-gray-800">${item.name}</h4>
-                        <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">${item.description}</p>
-                      </div>
-                      <div class="flex justify-between items-center mt-3">
-                        <span class="price-tag font-bold text-lg">₹${item.price}</span>
-                        ${renderCartButton(item)}
-                      </div>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `;
-        }
+        // Standard Grid View (all are grids for clean editorial view)
+        html += `
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            ${filteredItems.map(item => renderItemCard(item, category.id)).join('')}
+          </div>
+        `;
       });
 
       if (html === '') {
         html = `
-          <div class="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100">
-            <span class="material-symbols-outlined text-gray-300 text-6xl mb-4">search_off</span>
-            <h4 class="font-bold text-xl text-rossoDark">No dishes found</h4>
-            <p class="text-sm text-gray-400 mt-2">Try searching for something else or browse categories.</p>
-            <button onclick="clearSearch()" class="mt-6 bg-rossoRed hover:bg-red-700 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all">Clear Search</button>
+          <div class="text-center py-20 bg-rossoPaper rounded-xl border border-rossoNavy/10">
+            <span class="material-symbols-outlined text-rossoNavy/30 text-5xl mb-4">search_off</span>
+            <h4 class="font-display font-bold text-lg text-rossoNavy">No dishes found</h4>
+            <p class="text-sm text-rossoNavy/60 mt-2 font-medium">Try searching for something else or browse categories.</p>
+            <button onclick="clearSearch()" class="mt-6 bg-rossoRed hover:bg-red-700 text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all">Clear Search</button>
           </div>
         `;
       }
@@ -499,21 +807,86 @@
 
     // Render card item in standard grid
     function renderItemCard(item, catId) {
-      return `
-        <div class="bg-white rounded-2xl p-4 flex gap-4 card-shadow border border-gray-50 group hover:border-rossoRed/20 transition-all duration-300 snap-start">
-          <div class="w-28 h-28 md:w-32 md:h-32 flex-shrink-0 overflow-hidden rounded-xl bg-gray-100">
-            <img alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${item.image}">
+      // Find default price or price options
+      let priceHtml = '';
+      let actionHtml = '';
+
+      if (item.isPricedOptions) {
+        // Price options dropdown or selector
+        const optionsList = item.priceOptions;
+        if (!itemSelections[item.id]) {
+          itemSelections[item.id] = {
+            option: optionsList[0].name,
+            addons: []
+          };
+        }
+        const savedVal = itemSelections[item.id].option;
+        priceHtml = `
+          <div class="flex flex-col gap-1.5 w-full">
+            <label class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60">Select Option:</label>
+            <select id="select-option-${item.id}" onchange="updateItemOption('${item.id}', this.value, '${catId}')" class="bg-[#ebdccb]/30 border border-rossoNavy/20 rounded px-2.5 py-1.5 text-xs font-semibold text-rossoNavy focus:border-rossoRed focus:ring-0 cursor-pointer relative z-10">
+              ${optionsList.map(opt => `<option value="${opt.name}" ${opt.name === savedVal ? 'selected' : ''}>${opt.name} - ₹${opt.price}</option>`).join('')}
+            </select>
           </div>
-          <div class="flex-grow flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-start gap-2">
-                <h4 class="font-bold text-base md:text-lg text-rossoDark leading-tight">${item.name}</h4>
-                ${item.bestseller ? `<span class="bg-rossoRed text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase flex-shrink-0">Best</span>` : ''}
-              </div>
-              <p class="text-[11px] md:text-xs text-gray-500 mt-1.5 leading-relaxed line-clamp-2">${item.description}</p>
+        `;
+      } else {
+        priceHtml = `<span class="price-tag text-lg">₹${item.price}</span>`;
+      }
+
+      // Add-ons list if any
+      let addOnsHtml = '';
+      if (item.addOns && item.addOns.length > 0) {
+        addOnsHtml = `
+          <div class="mt-3 pt-3 border-t border-rossoNavy/10 w-full">
+            <p class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60 mb-2">Customizations:</p>
+            <div class="flex flex-col gap-2">
+              ${item.addOns.map(add => {
+                const addOnId = `${item.id}_addon_${add.name.replace(/\s+/g, '_')}`;
+                const isChecked = itemSelections[item.id] && itemSelections[item.id].addons.includes(add.name);
+                return `
+                  <label class="flex items-center gap-2 text-xs font-semibold text-rossoNavy cursor-pointer">
+                    <input type="checkbox" id="${addOnId}" onchange="toggleItemAddon('${item.id}', '${add.name}', this.checked, '${catId}')" ${isChecked ? 'checked' : ''} class="rounded border-rossoNavy/20 text-rossoRed focus:ring-0 bg-transparent">
+                    <span>${add.name} (+₹${add.price})</span>
+                  </label>
+                `;
+              }).join('')}
             </div>
-            <div class="flex justify-between items-center mt-3">
-              <span class="price-tag text-lg md:text-xl">₹${item.price}</span>
+          </div>
+        `;
+      }
+
+      // Veg or Non-Veg badge indicator
+      const vegIndicator = item.veg
+        ? `<span class="w-4 h-4 border border-green-600 flex items-center justify-center rounded-[2px] p-[2.5px] bg-white" title="Vegetarian"><span class="w-1.5 h-1.5 bg-green-600 rounded-full"></span></span>`
+        : `<span class="w-4 h-4 border border-red-600 flex items-center justify-center rounded-[2px] p-[2.5px] bg-white" title="Non-Vegetarian"><span class="w-0 h-0 border-l-[3.5px] border-l-transparent border-r-[3.5px] border-r-transparent border-b-[6.5px] border-b-red-600"></span></span>`;
+
+      return `
+        <div id="item-card-container-${item.id}" class="w-full h-full flex flex-col">
+          <div class="bg-[#ebdccb]/15 rounded-xl p-4 flex flex-col justify-between border border-rossoNavy/10 group hover:border-rossoRed/30 transition-all duration-300 snap-start flex-grow">
+            <div>
+              <div class="flex gap-4 mb-3">
+                <div class="w-24 h-24 md:w-28 md:h-28 flex-shrink-0 overflow-hidden rounded-lg bg-[#ebdccb]/30 border border-rossoNavy/5">
+                  <img alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${item.image}">
+                </div>
+                <div class="flex-grow flex flex-col justify-between">
+                  <div>
+                    <div class="flex justify-between items-start gap-1.5">
+                      <h4 class="font-display font-bold text-sm md:text-base text-rossoNavy leading-tight">${item.name}</h4>
+                      <div class="flex-shrink-0">${vegIndicator}</div>
+                    </div>
+                    <p class="text-xs text-rossoNavy/75 mt-1.5 leading-relaxed font-serif italic">${item.description}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-2">
+                ${priceHtml}
+              </div>
+              
+              ${addOnsHtml}
+            </div>
+
+            <div class="flex justify-end items-center mt-4 pt-3 border-t border-rossoNavy/5">
               ${renderCartButton(item)}
             </div>
           </div>
@@ -523,19 +896,158 @@
 
     // Renders the correct button based on whether item is in cart
     function renderCartButton(item) {
-      const quantity = cart[item.id] ? cart[item.id].qty : 0;
+      // Create a unique key based on selected option and add-ons
+      const cartKey = getActiveCartKey(item.id);
+      const quantity = cart[cartKey] ? cart[cartKey].qty : 0;
+
       if (quantity > 0) {
         return `
-          <div class="flex items-center bg-rossoRed text-white rounded-full overflow-hidden shadow-md">
-            <button onclick="updateQty('${item.id}', -1)" class="px-2.5 py-1.5 hover:bg-red-700 transition-colors font-bold text-xs">-</button>
-            <span class="px-2 text-xs font-bold min-w-[20px] text-center">${quantity}</span>
-            <button onclick="updateQty('${item.id}', 1)" class="px-2.5 py-1.5 hover:bg-red-700 transition-colors font-bold text-xs">+</button>
+          <div class="flex items-center bg-rossoRed text-white rounded-lg overflow-hidden shadow-md">
+            <button onclick="updateQty('${cartKey}', -1)" class="px-3.5 py-2 hover:bg-red-750 transition-colors font-bold text-xs">-</button>
+            <span class="px-2.5 text-xs font-bold min-w-[24px] text-center">${quantity}</span>
+            <button onclick="updateQty('${cartKey}', 1)" class="px-3.5 py-2 hover:bg-red-755 transition-colors font-bold text-xs">+</button>
           </div>
         `;
       }
       return `
-        <button onclick="addToCart('${item.id}', '${escapeHtml(item.name)}', ${item.price})" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-rossoRed hover:text-white hover:border-rossoRed transition-all duration-300 font-semibold text-lg">+</button>
+        <button onclick="handleAddClick('${item.id}')" class="px-4 py-2 bg-rossoNavy text-white hover:bg-rossoRed rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-350 flex items-center gap-1.5">
+          <span class="material-symbols-outlined block text-[15px] font-bold">add</span>
+          Add To Order
+        </button>
       `;
+    }
+
+    // Active state tracker for inputs
+    const itemSelections = {};
+
+    function initSelections() {
+      for (const cat in MENU_DATA) {
+        if (!Array.isArray(MENU_DATA[cat])) continue;
+        MENU_DATA[cat].forEach(item => {
+          if (!itemSelections[item.id]) {
+            itemSelections[item.id] = {
+              option: item.isPricedOptions && item.priceOptions && item.priceOptions.length > 0 ? item.priceOptions[0].name : '',
+              addons: []
+            };
+          }
+        });
+      }
+    }
+
+    function updateItemOption(itemId, optionVal, catId) {
+      if (!itemSelections[itemId]) {
+        itemSelections[itemId] = { option: optionVal, addons: [] };
+      } else {
+        itemSelections[itemId].option = optionVal;
+      }
+      renderSingleItemCard(itemId, catId);
+    }
+
+    function toggleItemAddon(itemId, addonName, isChecked, catId) {
+      if (!itemSelections[itemId]) {
+        itemSelections[itemId] = { option: '', addons: [] };
+      }
+      const addons = itemSelections[itemId].addons;
+      if (isChecked) {
+        if (!addons.includes(addonName)) {
+          addons.push(addonName);
+        }
+      } else {
+        const idx = addons.indexOf(addonName);
+        if (idx > -1) {
+          addons.splice(idx, 1);
+        }
+      }
+      renderSingleItemCard(itemId, catId);
+    }
+
+    function renderSingleItemCard(itemId, catId) {
+      const item = findMenuItemById(itemId);
+      if (!item) return;
+      const cardContainer = document.getElementById(`item-card-container-${itemId}`);
+      if (cardContainer) {
+        cardContainer.outerHTML = renderItemCard(item, catId);
+      }
+    }
+
+    function getActiveCartKey(itemId) {
+      const sel = itemSelections[itemId];
+      if (!sel) return itemId;
+      
+      const optionPart = sel.option ? `|opt:${sel.option}` : '';
+      
+      const sortedAddons = [...sel.addons].sort();
+      const addonsPart = sortedAddons.length > 0 ? `|addons:${sortedAddons.join(',')}` : '';
+      
+      return itemId + optionPart + addonsPart;
+    }
+
+    function findMenuItemById(itemId) {
+      for (const cat in MENU_DATA) {
+        if (!Array.isArray(MENU_DATA[cat])) continue;
+        const found = MENU_DATA[cat].find(i => i.id === itemId);
+        if (found) return found;
+      }
+      return null;
+    }
+
+    function handleAddClick(itemId) {
+      const item = findMenuItemById(itemId);
+      if (!item) return;
+
+      const sel = itemSelections[itemId];
+      const selectedOption = sel ? sel.option : '';
+      
+      let basePrice = item.price;
+      if (item.isPricedOptions && selectedOption) {
+        const matchedOpt = item.priceOptions.find(o => o.name === selectedOption);
+        if (matchedOpt) basePrice = matchedOpt.price;
+      }
+
+      const selectedAddOns = sel ? [...sel.addons] : [];
+      let addOnsPrice = 0;
+      if (item.addOns) {
+        item.addOns.forEach(add => {
+          if (selectedAddOns.includes(add.name)) {
+            addOnsPrice += add.price;
+          }
+        });
+      }
+
+      const finalPrice = basePrice + addOnsPrice;
+      const cartKey = getActiveCartKey(itemId);
+
+      let displayName = item.name;
+      if (selectedOption) displayName += ` (${selectedOption})`;
+      if (selectedAddOns.length > 0) displayName += ` + ${selectedAddOns.join(', ')}`;
+
+      if (cart[cartKey]) {
+        cart[cartKey].qty++;
+      } else {
+        cart[cartKey] = {
+          itemId: itemId,
+          name: displayName,
+          price: finalPrice,
+          qty: 1
+        };
+      }
+
+      // Clear add-on selections after adding to ensure fresh additions
+      if (itemSelections[itemId]) {
+        itemSelections[itemId].addons = [];
+      }
+
+      updateCartUI();
+      
+      let catId = '';
+      for (const cat in MENU_DATA) {
+        if (!Array.isArray(MENU_DATA[cat])) continue;
+        if (MENU_DATA[cat].some(i => i.id === itemId)) {
+          catId = cat;
+          break;
+        }
+      }
+      renderSingleItemCard(itemId, catId);
     }
 
     // Helpers
@@ -544,28 +1056,18 @@
     }
 
     // Cart actions
-    function addToCart(id, name, price) {
-      if (cart[id]) {
-        cart[id].qty++;
-      } else {
-        cart[id] = { name, price, qty: 1 };
-      }
-      updateCartUI();
-      renderMenu();
-    }
-
-    function updateQty(id, delta) {
-      if (cart[id]) {
-        cart[id].qty += delta;
-        if (cart[id].qty <= 0) {
-          delete cart[id];
+    function updateQty(cartKey, delta) {
+      if (cart[cartKey]) {
+        cart[cartKey].qty += delta;
+        if (cart[cartKey].qty <= 0) {
+          delete cart[cartKey];
         }
       }
       updateCartUI();
       renderMenu();
     }
 
-    // Slide Carousel
+    // Slide Carousel (No longer used as all is grid, kept for compatibility)
     function slideCarousel(catId, direction) {
       const carousel = document.getElementById(`carousel-${catId}`);
       if (carousel) {
@@ -622,9 +1124,9 @@
       // Populate Cart items list
       if (cartKeys.length === 0) {
         cartItemsContainer.innerHTML = `
-          <div class="text-center py-20 text-gray-400">
+          <div class="text-center py-20 text-rossoNavy/40">
             <span class="material-symbols-outlined text-5xl mb-2">restaurant</span>
-            <p class="text-sm">Your order is empty.</p>
+            <p class="text-sm font-semibold">Your order is empty.</p>
             <p class="text-xs mt-1">Add items from the menu to get started!</p>
           </div>
         `;
@@ -632,18 +1134,18 @@
         cartItemsContainer.innerHTML = cartKeys.map(key => {
           const item = cart[key];
           return `
-            <div class="flex items-center justify-between border-b pb-3 border-gray-100">
+            <div class="flex items-center justify-between border-b pb-3 border-rossoNavy/10">
               <div class="flex-grow pr-4">
-                <h5 class="font-semibold text-sm text-gray-800">${item.name}</h5>
+                <h5 class="font-semibold text-sm text-rossoNavy">${item.name}</h5>
                 <p class="text-xs text-rossoRed font-bold mt-1">₹${item.price} each</p>
               </div>
-              <div class="flex items-center bg-gray-100 rounded-full overflow-hidden border">
-                <button onclick="updateQty('${key}', -1)" class="px-2.5 py-1 text-gray-600 hover:bg-gray-200 transition-colors font-bold text-xs">-</button>
-                <span class="px-2 text-xs font-bold min-w-[20px] text-center text-gray-800">${item.qty}</span>
-                <button onclick="updateQty('${key}', 1)" class="px-2.5 py-1 text-gray-600 hover:bg-gray-200 transition-colors font-bold text-xs">+</button>
+              <div class="flex items-center bg-[#ebdccb]/30 rounded-lg overflow-hidden border border-rossoNavy/10">
+                <button onclick="updateQty('${key}', -1)" class="px-2.5 py-1 text-rossoNavy hover:bg-[#ebdccb]/60 transition-colors font-bold text-xs">-</button>
+                <span class="px-2 text-xs font-bold min-w-[20px] text-center text-rossoNavy">${item.qty}</span>
+                <button onclick="updateQty('${key}', 1)" class="px-2.5 py-1 text-rossoNavy hover:bg-[#ebdccb]/60 transition-colors font-bold text-xs">+</button>
               </div>
               <div class="w-20 text-right">
-                <span class="font-bold text-sm text-gray-800">₹${item.qty * item.price}</span>
+                <span class="font-bold text-sm text-rossoNavy">₹${item.qty * item.price}</span>
               </div>
             </div>
           `;
@@ -713,15 +1215,25 @@
       }
     }
 
-    // Header styling on scroll
+    // Header styling and sticky category bar shadow on scroll
     window.addEventListener('scroll', () => {
       const header = document.querySelector('header');
+      const stickyBar = document.getElementById('category-bar-sticky');
       if (window.scrollY > 50) {
         header.classList.remove('py-3');
-        header.classList.add('py-2', 'shadow-lg');
+        header.classList.add('py-2', 'shadow-md');
       } else {
         header.classList.remove('py-2', 'shadow-lg');
         header.classList.add('py-3');
+      }
+
+      if (stickyBar) {
+        // Sticky bar sticks below header when hero scrolls out of view (~380px)
+        if (window.scrollY > 380) {
+          stickyBar.classList.add('shadow-md');
+        } else {
+          stickyBar.classList.remove('shadow-md');
+        }
       }
     });
 
