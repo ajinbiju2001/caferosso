@@ -951,7 +951,7 @@
                   <h4 class="font-display text-lg font-bold text-rossoNavy uppercase tracking-wider">Choose Your Protein</h4>
                 </div>
                 <div class="space-y-3 font-medium text-sm text-rossoNavy">
-                  ${byoData.step2.map(prot => `
+                  ${[...byoData.step2].sort((a,b) => (a.price || 0) - (b.price || 0)).map(prot => `
                     <div class="flex justify-between items-center py-1">
                       <span class="font-display font-semibold tracking-wide text-xs md:text-sm uppercase">${prot.name}</span>
                       <span class="flex-grow border-b border-dotted border-rossoNavy/35 mx-3 mt-2"></span>
@@ -968,7 +968,7 @@
                   <h4 class="font-display text-lg font-bold text-rossoNavy uppercase tracking-wider">Add Your Sides</h4>
                 </div>
                 <div class="space-y-3 font-medium text-sm text-rossoNavy">
-                  ${byoData.step3.map(side => `
+                  ${[...byoData.step3].sort((a,b) => (a.price || 0) - (b.price || 0)).map(side => `
                     <div class="flex justify-between items-center py-1">
                       <span class="font-display font-semibold tracking-wide text-xs md:text-sm uppercase">${side.name}</span>
                       <span class="flex-grow border-b border-dotted border-rossoNavy/35 mx-3 mt-2"></span>
@@ -985,7 +985,7 @@
                   <h4 class="font-display text-lg font-bold text-rossoNavy uppercase tracking-wider">Grab a Drink</h4>
                 </div>
                 <div class="space-y-3 font-medium text-sm text-rossoNavy">
-                  ${byoData.step4.map(drink => `
+                  ${[...byoData.step4].sort((a,b) => (a.price || 0) - (b.price || 0)).map(drink => `
                     <div class="flex justify-between items-center py-1">
                       <span class="font-display font-semibold tracking-wide text-xs md:text-sm uppercase">${drink.name}</span>
                       <span class="flex-grow border-b border-dotted border-rossoNavy/35 mx-3 mt-2"></span>
@@ -1000,8 +1000,15 @@
         }
 
         const items = MENU_DATA[category.id] || [];
+        // Sort items by price ascending (lowest first)
+        const sortedItems = [...items].sort((a, b) => {
+          const priceA = a.price || (a.priceOptions && a.priceOptions.length > 0 ? a.priceOptions[0].price : 0);
+          const priceB = b.price || (b.priceOptions && b.priceOptions.length > 0 ? b.priceOptions[0].price : 0);
+          return priceA - priceB;
+        });
+
         // Filter items if searching
-        const filteredItems = items.filter(item =>
+        const filteredItems = sortedItems.filter(item =>
           item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           item.description.toLowerCase().includes(searchQuery.toLowerCase())
         );
