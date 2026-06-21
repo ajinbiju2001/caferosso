@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Cafe Rosso Origin | Digital Menu & Order</title>
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo.png">
 
   <!-- Tailwind CSS v3 CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  
+
   <!-- Google Fonts for typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Material Symbols Outlined -->
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -46,28 +50,30 @@
       color: #0c2340;
       font-family: 'Outfit', sans-serif;
     }
+
     body {
       overflow-x: clip;
       width: 100%;
     }
-    
+
     .price-tag {
       color: #0c2340;
       font-family: 'Outfit', sans-serif;
       font-weight: 600;
     }
-    
+
     .sticky-nav {
       background: rgba(244, 235, 225, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(12, 35, 64, 0.1);
     }
-    
+
     .section-divider {
       position: relative;
       text-align: center;
       margin: 3.5rem 0 2.5rem 0;
     }
+
     .section-divider::before {
       content: "";
       position: absolute;
@@ -78,12 +84,13 @@
       background: rgba(12, 35, 64, 0.15);
       z-index: 1;
     }
-    
+
     /* Decorative double border */
     .menu-border-container {
       border: 1px solid #0c2340;
       position: relative;
     }
+
     .menu-border-container::after {
       content: '';
       position: absolute;
@@ -95,45 +102,58 @@
       pointer-events: none;
       border-radius: 4px;
     }
-    
+
     /* Hide scrollbars but keep functionality */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
+
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    
+
     /* Drag-to-scroll styles */
     #category-slider {
       cursor: grab;
       user-select: none;
       -webkit-user-select: none;
     }
+
     #category-slider.grabbing {
       cursor: grabbing;
     }
-    
+
     /* Custom Smooth Animations */
     .cart-drawer {
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
       background-color: #f4ebe1;
       border-left: 2px solid #0c2340;
     }
+
     .fade-in-item {
       animation: fadeIn 0.4s ease-out forwards;
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 z-40 sticky-nav text-rossoNavy px-4 md:px-6 py-3 transition-all duration-300">
+  <header
+    class="fixed top-0 left-0 right-0 z-40 sticky-nav text-rossoNavy px-4 md:px-6 py-3 transition-all duration-300">
     <div class="max-w-7xl mx-auto flex justify-between items-center relative w-full">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-rossoNavy/20">
@@ -149,9 +169,11 @@
       </nav>
       <div class="flex items-center gap-3">
         <!-- Floating Cart Indicator Trigger -->
-        <button onclick="toggleCart(true)" id="header-cart-btn" class="relative bg-rossoNavy/5 hover:bg-rossoNavy/10 text-rossoNavy p-2.5 rounded-full transition-all">
+        <button onclick="toggleCart(true)" id="header-cart-btn"
+          class="relative bg-rossoNavy/5 hover:bg-rossoNavy/10 text-rossoNavy p-2.5 rounded-full transition-all">
           <span class="material-symbols-outlined block text-xl">shopping_cart</span>
-          <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-rossoRed text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold hidden scale-0 transition-all duration-300">0</span>
+          <span id="cart-count-badge"
+            class="absolute -top-1 -right-1 bg-rossoRed text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold hidden scale-0 transition-all duration-300">0</span>
         </button>
       </div>
     </div>
@@ -159,26 +181,39 @@
   <!-- END: MainHeader -->
 
   <!-- BEGIN: HeroSection (Premium Editorial Style) -->
-  <section class="relative min-h-[550px] lg:min-h-[600px] flex items-center justify-center py-20 bg-[#ebdccb]/20 border-b border-rossoNavy/10 overflow-hidden">
+  <section
+    class="relative min-h-[550px] lg:min-h-[600px] flex items-center justify-center py-20 bg-[#ebdccb]/20 border-b border-rossoNavy/10 overflow-hidden">
     <!-- Corner Decorative Ornaments -->
-    <div class="absolute top-24 left-4 w-12 h-12 border-t-2 border-l-2 border-rossoNavy/40 pointer-events-none rounded-tl-lg"></div>
-    <div class="absolute top-24 right-4 w-12 h-12 border-t-2 border-r-2 border-rossoNavy/40 pointer-events-none rounded-tr-lg"></div>
-    <div class="absolute bottom-24 left-4 w-12 h-12 border-b-2 border-l-2 border-rossoNavy/40 pointer-events-none rounded-bl-lg"></div>
-    <div class="absolute bottom-24 right-4 w-12 h-12 border-b-2 border-r-2 border-rossoNavy/40 pointer-events-none rounded-br-lg"></div>
+    <div
+      class="absolute top-24 left-4 w-12 h-12 border-t-2 border-l-2 border-rossoNavy/40 pointer-events-none rounded-tl-lg">
+    </div>
+    <div
+      class="absolute top-24 right-4 w-12 h-12 border-t-2 border-r-2 border-rossoNavy/40 pointer-events-none rounded-tr-lg">
+    </div>
+    <div
+      class="absolute bottom-24 left-4 w-12 h-12 border-b-2 border-l-2 border-rossoNavy/40 pointer-events-none rounded-bl-lg">
+    </div>
+    <div
+      class="absolute bottom-24 right-4 w-12 h-12 border-b-2 border-r-2 border-rossoNavy/40 pointer-events-none rounded-br-lg">
+    </div>
 
-    <div class="max-w-7xl mx-auto px-6 md:px-8 w-full relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <div
+      class="max-w-7xl mx-auto px-6 md:px-8 w-full relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       <!-- Left Column: Branding & Text -->
       <div class="lg:col-span-8 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
         <!-- Badge -->
-        <div class="w-28 h-28 rounded-full bg-rossoRed flex items-center justify-center shadow-xl border-4 border-rossoPaper">
-          <div class="text-center text-white font-display text-lg font-bold tracking-tighter leading-tight flex flex-col items-center justify-center">
+        <div
+          class="w-28 h-28 rounded-full bg-rossoRed flex items-center justify-center shadow-xl border-4 border-rossoPaper">
+          <div
+            class="text-center text-white font-display text-lg font-bold tracking-tighter leading-tight flex flex-col items-center justify-center">
             <span class="border-b border-white/40 pb-0.5 mb-0.5 tracking-widest text-xs">CAFÉ</span>
             <span class="tracking-[0.15em] text-sm font-black font-sans">ROSSO</span>
           </div>
         </div>
 
         <div class="space-y-3">
-          <span class="font-serif italic text-rossoRed text-base md:text-lg block tracking-wider">Cafe Rosso Origin</span>
+          <span class="font-serif italic text-rossoRed text-base md:text-lg block tracking-wider">Cafe Rosso
+            Origin</span>
           <h1 class="font-display text-5xl md:text-7xl font-bold tracking-widest text-rossoNavy uppercase leading-none">
             MENU <span class="text-rossoRed font-sans">BOOK</span>
           </h1>
@@ -192,15 +227,19 @@
         </div>
 
         <p class="font-serif italic text-lg md:text-xl text-rossoNavy/85 max-w-lg leading-relaxed">
-          Made with <span class="text-rossoRed font-semibold font-sans not-italic font-bold">passion</span>, served with <span class="text-rossoRed font-semibold font-sans not-italic font-bold">love</span>. Discover a curated collection of culinary masterpieces.
+          Made with <span class="text-rossoRed font-semibold font-sans not-italic font-bold">passion</span>, served with
+          <span class="text-rossoRed font-semibold font-sans not-italic font-bold">love</span>. Discover a curated
+          collection of culinary masterpieces.
         </p>
 
         <!-- CTA Buttons -->
         <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
-          <a href="#menu-sections" class="px-7 py-3 bg-rossoNavy text-white hover:bg-rossoRed hover:scale-105 rounded-lg text-xs font-bold uppercase tracking-widest transition-all shadow-md">
+          <a href="#menu-sections"
+            class="px-7 py-3 bg-rossoNavy text-white hover:bg-rossoRed hover:scale-105 rounded-lg text-xs font-bold uppercase tracking-widest transition-all shadow-md">
             Explore Menu
           </a>
-          <button onclick="toggleCart(true)" class="px-6 py-3 bg-transparent border-2 border-rossoNavy/20 text-rossoNavy hover:border-rossoRed hover:text-rossoRed hover:scale-105 rounded-lg text-xs font-bold uppercase tracking-widest transition-all">
+          <button onclick="toggleCart(true)"
+            class="px-6 py-3 bg-transparent border-2 border-rossoNavy/20 text-rossoNavy hover:border-rossoRed hover:text-rossoRed hover:scale-105 rounded-lg text-xs font-bold uppercase tracking-widest transition-all">
             View Order
           </button>
         </div>
@@ -211,14 +250,19 @@
         <!-- Wrapper container that is relative and has the exact size of the image -->
         <div class="relative w-full max-w-[240px] md:max-w-[300px] aspect-[4/5]">
           <!-- Decorative background frame (inset relative to this wrapper) -->
-          <div class="absolute -inset-2 md:-inset-3 border border-rossoNavy/10 rounded-2xl pointer-events-none transform translate-x-1.5 md:translate-x-2.5 translate-y-1.5 md:translate-y-2.5 z-0"></div>
-          
+          <div
+            class="absolute -inset-2 md:-inset-3 border border-rossoNavy/10 rounded-2xl pointer-events-none transform translate-x-1.5 md:translate-x-2.5 translate-y-1.5 md:translate-y-2.5 z-0">
+          </div>
+
           <!-- Main Premium Food Image Frame -->
           <div class="relative z-10 w-full h-full rounded-2xl overflow-hidden shadow-2xl border-4 border-rossoPaper">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800" alt="Premium Steak Cafe Rosso" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
-            
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800"
+              alt="Premium Steak Cafe Rosso"
+              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+
             <!-- Elegant overlay badge -->
-            <div class="absolute bottom-6 left-6 right-6 bg-rossoNavy/90 backdrop-blur-md text-white p-4 rounded-xl border border-white/10 flex items-center justify-between">
+            <div
+              class="absolute bottom-6 left-6 right-6 bg-rossoNavy/90 backdrop-blur-md text-white p-4 rounded-xl border border-white/10 flex items-center justify-between">
               <div>
                 <p class="text-[10px] uppercase font-bold tracking-widest text-rossoRed">Gourmet Selection</p>
                 <p class="font-display font-semibold text-sm tracking-wider uppercase mt-0.5">Classic French Steak</p>
@@ -235,9 +279,12 @@
   <!-- BEGIN: SearchAndFilters -->
   <section id="menu-sections" class="max-w-4xl mx-auto -mt-8 relative z-30 px-4">
     <!-- Search Bar -->
-    <div class="bg-rossoPaper rounded-xl shadow-xl p-1.5 flex items-center border border-rossoNavy/10 focus-within:border-rossoRed/50 transition-all">
+    <div
+      class="bg-rossoPaper rounded-xl shadow-xl p-1.5 flex items-center border border-rossoNavy/10 focus-within:border-rossoRed/50 transition-all">
       <span class="material-symbols-outlined text-rossoNavy/50 pl-3">search</span>
-      <input id="menu-search-input" class="w-full bg-transparent border-none focus:ring-0 text-rossoNavy px-3 py-3 text-sm md:text-base placeholder-rossoNavy/40 outline-none font-medium" placeholder="Search beverages, main plates, starters..." type="text">
+      <input id="menu-search-input"
+        class="w-full bg-transparent border-none focus:ring-0 text-rossoNavy px-3 py-3 text-sm md:text-base placeholder-rossoNavy/40 outline-none font-medium"
+        placeholder="Search beverages, main plates, starters..." type="text">
       <button onclick="clearSearch()" id="clear-search-btn" class="p-2 text-rossoNavy/40 hover:text-rossoRed hidden">
         <span class="material-symbols-outlined block text-lg">close</span>
       </button>
@@ -246,10 +293,14 @@
   </section>
 
   <!-- Category Filter Slider (Sticky) -->
-  <div id="category-bar-sticky" class="sticky top-[56px] md:top-[64px] z-30 bg-rossoPaper/95 backdrop-blur-md border-b border-rossoNavy/5 transition-all duration-300 w-full" style="margin-top:0.5rem;">
+  <div id="category-bar-sticky"
+    class="sticky top-[56px] md:top-[64px] z-30 bg-rossoPaper/95 backdrop-blur-md border-b border-rossoNavy/5 transition-all duration-300 w-full"
+    style="margin-top:0.5rem;">
     <div class="max-w-4xl mx-auto px-4">
       <div class="relative flex items-center">
-        <div class="flex overflow-x-auto gap-3 md:gap-4 px-4 py-3 md:py-4 no-scrollbar scroll-smooth items-center text-xs font-bold uppercase tracking-widest w-full" id="category-slider">
+        <div
+          class="flex overflow-x-auto gap-3 md:gap-4 px-4 py-3 md:py-4 no-scrollbar scroll-smooth items-center text-xs font-bold uppercase tracking-widest w-full"
+          id="category-slider">
           <!-- Generated Dynamically -->
         </div>
       </div>
@@ -266,20 +317,24 @@
   <!-- BEGIN: MainFooter -->
   <footer id="about-footer" class="bg-rossoNavy text-rossoPaper pt-16 pb-8 border-t border-rossoPaper/10">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12 border-b border-rossoPaper/10 pb-12 items-center">
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12 border-b border-rossoPaper/10 pb-12 items-center">
         <!-- Contact -->
         <div class="flex gap-4 items-center justify-start">
-          <div class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+          <div
+            class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
             <span class="material-symbols-outlined">call</span>
           </div>
           <div>
             <p class="text-[10px] text-rossoDarkPaper/60 uppercase tracking-widest">Call Us</p>
-            <a href="tel:+919645227772" class="font-bold text-sm hover:text-rossoRed transition-colors">+91 96452 27772</a>
+            <a href="tel:+919645227772" class="font-bold text-sm hover:text-rossoRed transition-colors">+91 96452
+              27772</a>
           </div>
         </div>
         <!-- Opening Hours -->
         <div class="flex gap-4 items-center justify-start">
-          <div class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+          <div
+            class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
             <span class="material-symbols-outlined">schedule</span>
           </div>
           <div>
@@ -295,28 +350,46 @@
         </div>
         <!-- Location -->
         <div class="flex gap-4 items-center justify-start">
-          <div class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
+          <div
+            class="w-12 h-12 rounded-full border border-rossoPaper/20 flex items-center justify-center text-rossoRed flex-shrink-0">
             <span class="material-symbols-outlined">pin_drop</span>
           </div>
           <div>
             <p class="text-[10px] text-rossoDarkPaper/60 uppercase tracking-widest">Our Location</p>
-            <p class="font-bold text-sm">55/413-1, 4th Cross Rd, Ramaswamy colony,<br>Panampilly Nagar, Kochi, Kerala 682036</p>
+            <p class="font-bold text-sm">55/413-1, 4th Cross Rd, Ramaswamy colony,<br>Panampilly Nagar, Kochi, Kerala
+              682036</p>
           </div>
         </div>
       </div>
-      
-      <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-4 text-[10px] text-rossoDarkPaper/50 uppercase tracking-widest">
+
+      <div
+        class="flex flex-col md:flex-row justify-between items-center gap-6 pt-4 text-[10px] text-rossoDarkPaper/50 uppercase tracking-widest">
         <p class="">© 2026 Cafe Rosso Origin. All Rights Reserved.</p>
         <!-- Social Icons -->
         <div class="flex gap-4">
-          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors"
+            href="#">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+              </path>
+            </svg>
           </a>
-          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors"
+            href="#">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+              </path>
+            </svg>
           </a>
-          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors" href="#">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+          <a class="w-10 h-10 rounded-full bg-rossoPaper/5 flex items-center justify-center hover:bg-rossoRed hover:text-white transition-colors"
+            href="#">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+              </path>
+            </svg>
           </a>
         </div>
         <p class="">Designed by Orzorra</p>
@@ -326,8 +399,10 @@
   <!-- END: MainFooter -->
 
   <!-- BEGIN: Sliding Cart Drawer -->
-  <div id="cart-backdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-black/40 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <div id="cart-drawer" class="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 shadow-2xl cart-drawer translate-x-full flex flex-col invisible">
+  <div id="cart-backdrop" onclick="toggleCart(false)"
+    class="fixed inset-0 bg-black/40 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <div id="cart-drawer"
+    class="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 shadow-2xl cart-drawer translate-x-full flex flex-col invisible">
     <!-- Cart Header -->
     <div class="p-4 border-b flex justify-between items-center bg-rossoNavy text-rossoPaper">
       <div class="flex items-center gap-2">
@@ -354,11 +429,15 @@
         <span id="cart-subtotal" class="font-bold text-xl">₹0</span>
       </div>
       <p class="text-[11px] text-rossoNavy/70 leading-normal font-medium">
-        Orders will be sent directly to our restaurant via WhatsApp. We will confirm your delivery/pickup details immediately.
+        Orders will be sent directly to our restaurant via WhatsApp. We will confirm your delivery/pickup details
+        immediately.
       </p>
-      <button id="whatsapp-checkout-btn" class="w-full bg-rossoRed hover:bg-red-700 text-white py-3.5 rounded-lg flex items-center justify-center gap-2 font-bold transition-all shadow-md text-xs uppercase tracking-widest">
+      <button id="whatsapp-checkout-btn"
+        class="w-full bg-rossoRed hover:bg-red-700 text-white py-3.5 rounded-lg flex items-center justify-center gap-2 font-bold transition-all shadow-md text-xs uppercase tracking-widest">
         <svg fill="currentColor" class="h-4 w-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.898 7.898 0 0 0-2.327-5.607zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
+          <path
+            d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.898 7.898 0 0 0-2.327-5.607zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z">
+          </path>
         </svg>
         Confirm Order via WhatsApp
       </button>
@@ -367,9 +446,11 @@
   <!-- END: Sliding Cart Drawer -->
 
   <!-- BEGIN: Floating Action Button (FAB) Cart -->
-  <button id="floating-cart-fab" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-rossoRed text-white h-14 px-5 rounded-full shadow-2xl flex items-center justify-center gap-2.5 hover:bg-red-700 hover:scale-105 transition-all duration-300 translate-y-24 scale-0">
+  <button id="floating-cart-fab" onclick="toggleCart(true)"
+    class="fixed bottom-6 right-6 z-40 bg-rossoRed text-white h-14 px-5 rounded-full shadow-2xl flex items-center justify-center gap-2.5 hover:bg-red-700 hover:scale-105 transition-all duration-300 translate-y-24 scale-0">
     <span class="material-symbols-outlined block text-2xl">shopping_cart</span>
-    <span id="fab-cart-count" class="bg-white text-rossoRed text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
+    <span id="fab-cart-count"
+      class="bg-white text-rossoRed text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">0</span>
   </button>
   <!-- END: Floating Action Button (FAB) Cart -->
 
@@ -448,9 +529,9 @@
         { id: 'sn9', name: 'Animal Fries Beef', description: 'Crispy golden fries loaded with melted cheese, sweet caramelized onions, and our signature tangy secret sauce. A rich, savoury, and undeniably indulgent treat.', price: 350, image: 'loaded_fries_beef.png', veg: false }
       ],
       house_special_burgers: [
-        { id: 'hb1', name: 'Rosso New Your Smash Beef Burger', description: 'Juicy smashed beef patty seared to perfection, layered with American cheese, caramelised onions, and signature house sauce.', price: 340, veg: false, addOns: [{name: 'Smash Patty', price: 100}, {name: 'Fried Egg', price: 40}, {name: 'Grilled Mushrooms', price: 40}, {name: 'Cheese', price: 20}, {name: 'Fried Jalapeno', price: 40}], image: 'rosso_new_york_smash_beef_burger.jpg' },
-        { id: 'hb2', name: 'Quarter Pounder Beef Burger', description: 'Our signature 1/4 lb. seasoned beef patty, loaded with melted cheese, classic pickles, onions, ketchup, and mayo on a soft, toasted bun. Big beef, no fuss.', price: 360, veg: false, addOns: [{name: 'Beef Patty 1/4 lb', price: 120}, {name: 'Fried Egg', price: 40}, {name: 'Grilled Mushrooms', price: 40}, {name: 'Cheese', price: 20}, {name: 'Fried Jalapeno', price: 40}], image: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg' },
-        { id: 'hb3', name: 'Jalapeno Smash Burger', description: 'Juicy smashed beef patty seared to perfection, layered with American cheese, caramelised onions, jalapenos, bacon jam and signature house sauce.', price: 350, veg: false, addOns: [{name: 'Smash Patty', price: 100}, {name: 'Fried Egg', price: 40}, {name: 'Grilled Mushrooms', price: 40}, {name: 'Cheese', price: 20}, {name: 'Fried Jalapeno', price: 40}], image: 'jalapeno_smash_burger.jpg' },
+        { id: 'hb1', name: 'Rosso New Your Smash Beef Burger', description: 'Juicy smashed beef patty seared to perfection, layered with American cheese, caramelised onions, and signature house sauce.', price: 340, veg: false, addOns: [{ name: 'Smash Patty', price: 100 }, { name: 'Fried Egg', price: 40 }, { name: 'Grilled Mushrooms', price: 40 }, { name: 'Cheese', price: 20 }, { name: 'Fried Jalapeno', price: 40 }], image: 'rosso_new_york_smash_beef_burger.jpg' },
+        { id: 'hb2', name: 'Quarter Pounder Beef Burger', description: 'Our signature 1/4 lb. seasoned beef patty, loaded with melted cheese, classic pickles, onions, ketchup, and mayo on a soft, toasted bun. Big beef, no fuss.', price: 360, veg: false, addOns: [{ name: 'Beef Patty 1/4 lb', price: 120 }, { name: 'Fried Egg', price: 40 }, { name: 'Grilled Mushrooms', price: 40 }, { name: 'Cheese', price: 20 }, { name: 'Fried Jalapeno', price: 40 }], image: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg' },
+        { id: 'hb3', name: 'Jalapeno Smash Burger', description: 'Juicy smashed beef patty seared to perfection, layered with American cheese, caramelised onions, jalapenos, bacon jam and signature house sauce.', price: 350, veg: false, addOns: [{ name: 'Smash Patty', price: 100 }, { name: 'Fried Egg', price: 40 }, { name: 'Grilled Mushrooms', price: 40 }, { name: 'Cheese', price: 20 }, { name: 'Fried Jalapeno', price: 40 }], image: 'jalapeno_smash_burger.jpg' },
         { id: 'hb4', name: 'Korean Fried Chicken Burger', description: 'Crispy fried chicken glazed in gochujang honey sauce, balanced with fresh coleslaw for a perfect sweet-spicy crunch.', price: 380, veg: false, image: 'korean_fried_chicken_burger.jpg' },
         { id: 'hb5', name: 'Grilled BBQ Chicken Burger', description: 'Grilled chicken breast mixed in house special bbq sauce topped with cheese onions and lettuce.', price: 320, veg: false, image: 'grilled_bbq_chicken_burger.jpg' },
         { id: 'hb6', name: 'Tandoori Paneer Burger', description: 'Char-grilled paneer marinated in tandoori spices, topped with mint mayo and fresh spiced salad.', price: 320, veg: true, image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/%D7%94%D7%9E%D7%91%D7%95%D7%A8%D7%92%D7%A8_%D7%98%D7%91%D7%A2%D7%95%D7%A0%D7%99.jpg' }
@@ -464,13 +545,13 @@
         { id: 'ss6', name: 'American Roasted Veg Sando', description: 'A medley of herb-roasted vegetables layered in ciabatta with a smooth house-made dip.', price: 320, veg: true, image: 'american_roasted_veg_sando.png' }
       ],
       soups: [
-        { id: 'sp1', name: 'Cream of Mushroom & Thyme', description: 'A velvety cream soup crafted with sauteed button mushrooms, slow-infused garlic, and fresh thyme, finished with a touch of cream. Served with toasted cheese bread and crispy mushroom garnish.', price: 210, veg: true, addOns: [{name: 'Add Chicken', price: 60}], image: 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Cream_Mushroom_soup_2.jpg' },
-        { id: 'sp2', name: 'Burnt Garlic Broccoli Soup', description: 'Silky smooth broccoli purée elevated with the deep aroma of roasted garlic and a drizzle of extra virgin olive oil, paired with golden cheese toasts.', price: 210, veg: true, addOns: [{name: 'Add Chicken', price: 60}], image: 'burnt_garlic_broccoli_soup.jpg' },
-        { id: 'sp3', name: 'Hot and Sour Soup', description: 'A hearty, street-style favourite loaded with crunchy, seasonal vegetables in a glassy, spiced-up broth. Flavoured with soy sauce, chillies, and a zesty vinegar tang.', price: 190, veg: true, addOns: [{name: 'Add Chicken', price: 60}], image: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Ping_SJ_hot_%26_sour_soup.JPG' }
+        { id: 'sp1', name: 'Cream of Mushroom & Thyme', description: 'A velvety cream soup crafted with sauteed button mushrooms, slow-infused garlic, and fresh thyme, finished with a touch of cream. Served with toasted cheese bread and crispy mushroom garnish.', price: 210, veg: true, addOns: [{ name: 'Add Chicken', price: 60 }], image: 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Cream_Mushroom_soup_2.jpg' },
+        { id: 'sp2', name: 'Burnt Garlic Broccoli Soup', description: 'Silky smooth broccoli purée elevated with the deep aroma of roasted garlic and a drizzle of extra virgin olive oil, paired with golden cheese toasts.', price: 210, veg: true, addOns: [{ name: 'Add Chicken', price: 60 }], image: 'burnt_garlic_broccoli_soup.jpg' },
+        { id: 'sp3', name: 'Hot and Sour Soup', description: 'A hearty, street-style favourite loaded with crunchy, seasonal vegetables in a glassy, spiced-up broth. Flavoured with soy sauce, chillies, and a zesty vinegar tang.', price: 190, veg: true, addOns: [{ name: 'Add Chicken', price: 60 }], image: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Ping_SJ_hot_%26_sour_soup.JPG' }
       ],
       salads: [
         { id: 'sl1', name: 'California Chicken Salad', description: 'Crisp romaine lettuce and tender grilled chicken tomatoes, tossed with sweet corn, beans and diced tomatoes. Topped with crunchy tortilla strips and a drizzle of our signature house dressing.', price: 340, veg: false, image: 'https://upload.wikimedia.org/wikipedia/commons/4/42/Flickr_sa_ku_ra_10556400--Chicken_salad.jpg' },
-        { id: 'sl2', name: 'Café Ceaser Salad', description: 'A wholesome mix of crisp romaine lettuce, cherry tomatoes, and shaved Parmesan, tossed in a light creamy dressing, topped with grilled chicken or seasonal vegetables.', price: 250, veg: true, addOns: [{name: 'Add Chicken', price: 90}], image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Caesar_salad_%282%29.jpg' },
+        { id: 'sl2', name: 'Café Ceaser Salad', description: 'A wholesome mix of crisp romaine lettuce, cherry tomatoes, and shaved Parmesan, tossed in a light creamy dressing, topped with grilled chicken or seasonal vegetables.', price: 250, veg: true, addOns: [{ name: 'Add Chicken', price: 90 }], image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Caesar_salad_%282%29.jpg' },
         { id: 'sl3', name: 'Grilled Aubergine Salad', description: 'Tender open-fire roasted aubergine blended with feta, pesto, served over crisp mixed greens.', price: 250, veg: true, image: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400' }
       ],
       main_plates: [
@@ -479,8 +560,8 @@
         { id: 'mp3', name: 'Chicken Roulade', description: 'Juicy chicken roulade stuffed with herbs and cheese, served with a side of creamy mashed potatoes.', price: 420, image: 'chicken_roulade.png', veg: false },
         { id: 'mp4', name: 'Parmesan Creamy Delight', description: 'Juicy and succulent grilled chicken breast topped with a creamy parmesan sauce. Served with house rice or mashed potato with buttery grilled veggies.', price: 450, image: 'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&q=80&w=400', veg: false },
         { id: 'mp5', name: 'Cajun Blackened Chicken with Dirty Rice', description: 'A chef special Cajun classic. Tender chicken breast grilled in a bold blend of cajun spices and grilled until deeply charred. It is served over a savoury, rich seasoned Louisiana-style rice cooked with ground meat, bell peppers, onions and other spices.', price: 450, image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&q=80&w=400', veg: false },
-        { id: 'mp6', name: 'Thai Pad Kra Pao Chicken/Beef', description: 'The ultimate Thai comfort food. Your choice of minced chicken or beef, wok-tossed with fresh holy basil, garlic, and bird\'s eye chillies in a savory umami sauce. Served over steamed jasmine rice and crowned with a crispy Thai-style fried egg.', price: 380, image: 'https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?auto=format&fit=crop&q=80&w=400', veg: false, isPricedOptions: true, priceOptions: [{ name: 'Chicken', price: 380 }, { name: 'Beef', price: 420 }] },
-        { id: 'mp7', name: 'Tandoori Paneer Steak', description: 'Grilled paneer infused with bold tandoori flavors, served with buttery gravy, pickled salad, and refreshing mint salsa.', price: 380, image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&q=80&w=400', veg: true }
+        { id: 'mp6', name: 'Thai Pad Kra Pao Chicken/Beef', description: 'The ultimate Thai comfort food. Your choice of minced chicken or beef, wok-tossed with fresh holy basil, garlic, and bird\'s eye chillies in a savory umami sauce. Served over steamed jasmine rice and crowned with a crispy Thai-style fried egg.', price: 380, image: 'hai_pad_kra_pao.png', veg: false, isPricedOptions: true, priceOptions: [{ name: 'Chicken', price: 380 }, { name: 'Beef', price: 420 }] },
+        { id: 'mp7', name: 'Tandoori Paneer Steak', description: 'Grilled paneer infused with bold tandoori flavors, served with buttery gravy, pickled salad, and refreshing mint salsa.', price: 380, image: 'tandoori_paneer_steak.png', veg: true }
       ],
       pastas: [
         { id: 'pa1', name: 'Fettuccini Ala Fungi', description: 'Fresh fettuccine tossed in a rich, velvety cream sauce with pan-roasted mixed wild mushrooms, garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 290, image: 'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&q=80&w=400', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] },
@@ -488,15 +569,15 @@
         { id: 'pa3', name: 'Creamy Pesto Fettuccini', description: 'Fresh fettuccine tossed in a rich, creamy pesto sauce with pan-roasted garlic, and fresh thyme, finished with freshly grated Parmigiano-Reggiano.', price: 260, image: 'creamy_pesto_fettuccini.jpg', veg: true, addOns: [{ name: 'Add Chicken', price: 100 }] }
       ],
       french_toast: [
-        { id: 'ft1', name: 'Korean Chocolate Toast', description: 'A Korean style toast topped with rich and silky chocolate sauce. A mind blowing twist on the classic French toast.', price: 250, image: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&q=80&w=400', veg: true },
-        { id: 'ft2', name: 'Korean Pistachio Toast', description: 'A Korean style toast topped with rich and silky Pistachio sauce. Service with whipped cream and toppings.', price: 250, image: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=400', veg: true }
+        { id: 'ft1', name: 'Korean Chocolate Toast', description: 'A Korean style toast topped with rich and silky chocolate sauce. A mind blowing twist on the classic French toast.', price: 250, image: 'korean_chocolate_toast.png', veg: true },
+        { id: 'ft2', name: 'Korean Pistachio Toast', description: 'A Korean style toast topped with rich and silky Pistachio sauce. Service with whipped cream and toppings.', price: 250, image: 'Korean_Pistachio_Toast.png', veg: true }
       ],
       desserts: [
         { id: 'de1', name: 'Grape Spooty', description: 'Soft vanilla sponge layered with red wine grape compote, served warm with a scoop of ice cream.', price: 250, image: 'https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=400', veg: true },
-        { id: 'de2', name: 'Rosso Cheesecake', description: 'Decadent, creamy house-made cheesecake served with a side of house chocolate sauce.', price: 250, image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&q=80&w=400', veg: true },
-        { id: 'de3', name: 'Silky Cookie Dough', description: 'Warm and creamy edible cookie dough, rich chocolate chips, served with a drizzle of chocolate sauce and vanilla ice cream.', price: 280, image: 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&q=80&w=400', veg: true },
-        { id: 'de4', name: 'Chocolate Souffle', description: 'Baked-to-order, this delicate French classic rises high above the ramekin. Features an airy, cloud-like centre and a rich, decadent finish. Served with a dusting of powdered sugar and vanilla ice cream.', price: 300, image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=400', veg: true },
-        { id: 'de5', name: 'Rich Chocolate Cake', description: 'A deeply rich chocolate cake offering a velvety, melt-in-your-mouth crumb. Served with an elegant and warm chocolate sauce.', price: 250, image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400', veg: true }
+        { id: 'de2', name: 'Rosso Cheesecake', description: 'Decadent, creamy house-made cheesecake served with a side of house chocolate sauce.', price: 250, image: 'Rosso_Cheesecake.png', veg: true },
+        { id: 'de3', name: 'Silky Cookie Dough', description: 'Warm and creamy edible cookie dough, rich chocolate chips, served with a drizzle of chocolate sauce and vanilla ice cream.', price: 280, image: 'Silky_Cookie_Dough.png', veg: true },
+        { id: 'de4', name: 'Chocolate Souffle', description: 'Baked-to-order, this delicate French classic rises high above the ramekin. Features an airy, cloud-like centre and a rich, decadent finish. Served with a dusting of powdered sugar and vanilla ice cream.', price: 300, image: 'chocolate_Souffle.png', veg: true },
+        { id: 'de5', name: 'Rich Chocolate Cake', description: 'A deeply rich chocolate cake offering a velvety, melt-in-your-mouth crumb. Served with an elegant and warm chocolate sauce.', price: 250, image: 'Rich_Chocolate_Cake.png', veg: true }
       ],
       hot_beverages: [
         { id: 'hb1', name: 'Espresso', description: 'A concentrated shot of rich, dark-roasted coffee with a thick, golden crema.', price: 80, image: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&q=80&w=400', veg: true },
@@ -516,13 +597,13 @@
       milkshakes: [
         { id: 'ms1', name: 'Chocolate Freak Shake', description: 'An indulgent chocolate shake piled high with toppings and a chocolate drizzle.', price: 210, image: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&q=80&w=400', veg: true },
         { id: 'ms2', name: 'Nutella Shake', description: 'Creamy milkshake blended with Nutella for a hazelnut-chocolate hit.', price: 210, image: 'nutella_shake_new.jpg', veg: true, zoomOut: true },
-        { id: 'ms3', name: 'Nutty Glow', description: 'A nutty, malt-kissed shake with a smooth, toasted finish.', price: 190, image: 'https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms3', name: 'Nutty Glow', description: 'A nutty, malt-kissed shake with a smooth, toasted finish.', price: 190, image: 'Nutty_Glow.png', veg: true },
         { id: 'ms4', name: 'Mango Shake', description: 'Sweet, ripe mango blended thick and chilled — a tropical classic.', price: 190, image: 'https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&q=80&w=400', veg: true },
         { id: 'ms5', name: 'Cold Milo Shake', description: 'Malted Milo blended cold and frothy, nostalgic in every sip.', price: 210, image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=400', veg: true },
         { id: 'ms6', name: 'Avocado Kiwi Shake', description: 'Creamy avocado and tangy kiwi blended into a fresh, vibrant shake.', price: 220, image: 'https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?auto=format&fit=crop&q=80&w=400', veg: true },
         { id: 'ms7', name: 'Peanut Choco Shake', description: 'Roasted peanut butter and chocolate blended into a rich, nutty shake.', price: 190, image: 'https://images.unsplash.com/photo-1553787499-6f9133860278?auto=format&fit=crop&q=80&w=400', veg: true },
         { id: 'ms8', name: 'Chocolate Shake', description: 'A timeless, creamy chocolate milkshake, simple and satisfying.', price: 180, image: 'https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&q=80&w=400', veg: true },
-        { id: 'ms9', name: 'Melon Magic Shake', description: 'Chilled musk melon blended smooth for a light, fragrant sip.', price: 190, image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&q=80&w=400', veg: true },
+        { id: 'ms9', name: 'Melon Magic Shake', description: 'Chilled musk melon blended smooth for a light, fragrant sip.', price: 190, image: 'Melon_Magic_Shake.png', veg: true },
         { id: 'ms10', name: 'Velvet Bloom Shake', description: 'A delicately sweet, smooth house blend with a soft floral finish.', price: 190, image: 'velvet_bloom_shake_new.jpg', veg: true, zoomOut: true }
       ],
       special_desserts_drinks: [
@@ -668,11 +749,11 @@
     function renderCategories() {
       categorySlider.innerHTML = CATEGORIES.map((cat, index) => {
         const isActive = cat.id === currentCategory;
-        const activeClass = isActive 
-          ? 'text-rossoRed' 
+        const activeClass = isActive
+          ? 'text-rossoRed'
           : 'text-rossoNavy/60 hover:text-rossoRed';
-        const buttonBg = isActive 
-          ? 'bg-rossoRed text-white shadow-md scale-105' 
+        const buttonBg = isActive
+          ? 'bg-rossoRed text-white shadow-md scale-105'
           : 'bg-[#ebdccb]/30 border border-rossoNavy/10 text-rossoNavy';
 
         let materialIcon = 'restaurant_menu';
@@ -710,7 +791,7 @@
       if (activeBtn) {
         activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
-      
+
       // Clear search so they can browse the full category
       if (searchQuery) {
         menuSearchInput.value = '';
@@ -804,7 +885,7 @@
             if (currentCategory !== catId) {
               currentCategory = catId;
               updateCategoryStyles(catId);
-              
+
               const activeBtn = document.getElementById(`cat-btn-${catId}`);
               if (activeBtn) {
                 activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -824,7 +905,7 @@
       CATEGORIES.forEach(cat => {
         const btn = document.getElementById(`cat-btn-${cat.id}`);
         if (!btn) return;
-        
+
         const innerDiv = btn.firstElementChild;
         if (cat.id === activeCatId) {
           btn.className = 'flex flex-col items-center gap-1.5 min-w-fit transition-all duration-300 group text-rossoRed';
@@ -844,7 +925,7 @@
         // Handle special Build Your Own step presentation layout
         if (category.id === 'build_your_own') {
           const byoData = MENU_DATA.build_your_own;
-          
+
           html += `
             <div id="section-${category.id}" class="section-divider scroll-mt-24 fade-in-item">
               <div class="inline-block bg-[#f4ebe1] px-6 relative z-10">
@@ -935,7 +1016,7 @@
 
         const items = MENU_DATA[category.id] || [];
         // Filter items if searching
-        const filteredItems = items.filter(item => 
+        const filteredItems = items.filter(item =>
           item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           item.description.toLowerCase().includes(searchQuery.toLowerCase())
         );
@@ -1001,14 +1082,14 @@
             <label class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60">Select Option:</label>
             <div class="flex flex-wrap gap-2 relative z-10">
               ${optionsList.map(opt => {
-                const isSelected = opt.name === savedVal;
-                return `
+          const isSelected = opt.name === savedVal;
+          return `
                   <button type="button" onclick="updateItemOption('${item.id}', '${opt.name}', '${catId}')" class="flex items-center justify-center gap-1 text-[10px] font-bold tracking-widest uppercase cursor-pointer px-3 py-1.5 rounded-full border transition-all duration-300 select-none ${isSelected ? 'bg-rossoRed text-white border-rossoRed shadow-sm' : 'bg-[#ebdccb]/30 text-rossoNavy border-rossoNavy/10 hover:border-rossoRed/30 hover:bg-[#ebdccb]/50'}">
                     <span>${opt.name}</span>
                     <span class="${isSelected ? 'text-white/90' : 'text-rossoRed'} ml-1">₹${opt.price}</span>
                   </button>
                 `;
-              }).join('')}
+        }).join('')}
             </div>
           </div>
         `;
@@ -1024,16 +1105,16 @@
             <p class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60 mb-2">Customizations:</p>
             <div class="flex flex-wrap gap-2 mt-2">
               ${item.addOns.map(add => {
-                const addOnId = `${item.id}_addon_${add.name.replace(/\s+/g, '_')}`;
-                const isChecked = itemSelections[item.id] && itemSelections[item.id].addons.includes(add.name);
-                return `
+          const addOnId = `${item.id}_addon_${add.name.replace(/\s+/g, '_')}`;
+          const isChecked = itemSelections[item.id] && itemSelections[item.id].addons.includes(add.name);
+          return `
                   <label class="flex items-center justify-center gap-1 text-[10px] font-bold tracking-widest uppercase cursor-pointer px-3 py-1.5 rounded-full border transition-all duration-300 select-none ${isChecked ? 'bg-rossoRed text-white border-rossoRed shadow-sm' : 'bg-[#ebdccb]/30 text-rossoNavy border-rossoNavy/10 hover:border-rossoRed/30 hover:bg-[#ebdccb]/50'}">
                     <input type="checkbox" id="${addOnId}" onchange="toggleItemAddon('${item.id}', '${add.name}', this.checked, '${catId}')" ${isChecked ? 'checked' : ''} class="hidden">
                     <span>${add.name}</span>
                     <span class="${isChecked ? 'text-white/90' : 'text-rossoRed'}">+₹${add.price}</span>
                   </label>
                 `;
-              }).join('')}
+        }).join('')}
             </div>
           </div>
         `;
@@ -1045,10 +1126,10 @@
         : `<span class="w-4 h-4 border border-red-600 flex items-center justify-center rounded-[2px] p-[2.5px] bg-white" title="Non-Vegetarian"><span class="w-0 h-0 border-l-[3.5px] border-l-transparent border-r-[3.5px] border-r-transparent border-b-[6.5px] border-b-red-600"></span></span>`;
 
       const isFeatured = !!item.isFeatured;
-      const cardContainerClasses = isFeatured 
-        ? 'w-full h-full flex flex-col md:col-span-2 lg:col-span-2' 
+      const cardContainerClasses = isFeatured
+        ? 'w-full h-full flex flex-col md:col-span-2 lg:col-span-2'
         : 'w-full h-full flex flex-col';
-      
+
       const imgContainerClasses = isFeatured
         ? 'w-28 h-28 md:w-40 md:h-40 flex-shrink-0 overflow-hidden rounded-lg bg-[#ebdccb]/30 border border-rossoNavy/5 shadow-md'
         : 'w-24 h-24 md:w-28 md:h-28 flex-shrink-0 overflow-hidden rounded-lg bg-[#ebdccb]/30 border border-rossoNavy/5';
@@ -1172,12 +1253,12 @@
     function getActiveCartKey(itemId) {
       const sel = itemSelections[itemId];
       if (!sel) return itemId;
-      
+
       const optionPart = sel.option ? `|opt:${sel.option}` : '';
-      
+
       const sortedAddons = [...sel.addons].sort();
       const addonsPart = sortedAddons.length > 0 ? `|addons:${sortedAddons.join(',')}` : '';
-      
+
       return itemId + optionPart + addonsPart;
     }
 
@@ -1196,7 +1277,7 @@
 
       const sel = itemSelections[itemId];
       const selectedOption = sel ? sel.option : '';
-      
+
       let basePrice = item.price;
       if (item.isPricedOptions && selectedOption) {
         const matchedOpt = item.priceOptions.find(o => o.name === selectedOption);
@@ -1237,7 +1318,7 @@
       }
 
       updateCartUI();
-      
+
       let catId = '';
       for (const cat in MENU_DATA) {
         if (!Array.isArray(MENU_DATA[cat])) continue;
@@ -1380,7 +1461,7 @@
       const phoneNumber = '919645227772';
       let message = '*Cafe Rosso Origin Order*\n';
       message += '---------------------------------\n';
-      
+
       const cartKeys = Object.keys(cart);
       let total = 0;
 
@@ -1406,7 +1487,7 @@
       whatsappCheckoutBtn.onclick = () => {
         window.open(waUrl, '_blank');
       };
-      
+
       // Update header link
       const headerWaBtn = document.getElementById('whatsapp-order-btn-header');
       if (headerWaBtn) {
@@ -1440,4 +1521,5 @@
     window.onload = init;
   </script>
 </body>
+
 </html>
