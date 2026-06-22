@@ -294,12 +294,11 @@
 
   <!-- Category Filter Slider (Sticky) -->
   <div id="category-bar-sticky"
-    class="sticky top-[56px] md:top-[64px] z-30 bg-rossoPaper/95 backdrop-blur-md border-b border-rossoNavy/5 transition-all duration-300 w-full"
-    style="margin-top:0.5rem;">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="relative flex items-center">
+    class="sticky top-[64px] md:top-[72px] z-30 bg-rossoPaper/95 backdrop-blur-md border-b border-rossoNavy/5 transition-all duration-300 w-full">
+    <div class="max-w-4xl mx-auto w-full">
+      <div class="relative flex items-center w-full">
         <div
-          class="flex overflow-x-auto gap-3 md:gap-4 px-4 py-3 md:py-4 no-scrollbar scroll-smooth items-center text-xs font-bold uppercase tracking-widest w-full"
+          class="flex overflow-x-auto gap-3 md:gap-4 px-4 md:px-8 py-3 md:py-4 no-scrollbar scroll-smooth items-center text-xs font-bold uppercase tracking-widest w-full after:content-[''] after:w-1 after:block after:flex-shrink-0"
           id="category-slider">
           <!-- Generated Dynamically -->
         </div>
@@ -464,10 +463,12 @@
     const MENU_DATA = {
       build_your_own: {
         step1: [
-          { name: 'Rice Bowl', description: 'Lime Cilantro Rice, Fajita Veggies, Pinto Beans, Sour Cream, White Cheddar Cheese, Farm Fresh Lettuce', image: 'rice_bowl.png' },
-          { name: 'Burrito', description: 'Fajita Veggies, Pinto Beans, Sour Cream, White Cheddar Cheese, Farm Fresh Lettuce', image: 'burrito_wrap.png' },
-          { name: 'Quesadilla', description: 'Grilled tortilla filled with white cheddar cheese and your selected protein.', image: 'https://images.unsplash.com/photo-1618040996337-56904b7850b9?auto=format&fit=crop&q=80&w=400' },
-          { name: 'Fajita Salad', description: 'Fajita Veggies, Pinto Beans, Sour Cream, White Cheddar Cheese, Farm Fresh Lettuce', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=400' }
+          { name: 'Burrito', description: 'White rice, Vegetables, Black beans, Any of the protein, Pico (mild salsa), Sour cream, Cheese, Lettuce', image: 'burrito_wrap.png' },
+          { name: 'Rice Bowl', description: 'Rice, Vegetables, Pinto beans, Any of the protein, Pico (mild salsa), Roasted corns, Sour cream, Cheese, Lettuce', image: 'rice_bowl.png' },
+          { name: 'Quesadilla', description: 'Cheese, Vegetables, Any of the protein, Pico (mild salsa), Jalapeno, Cheese. Then toast. Add on: medium salsa', image: 'https://images.unsplash.com/photo-1618040996337-56904b7850b9?auto=format&fit=crop&q=80&w=400' },
+          { name: 'Tacos', description: 'Vegetables, Any of the protein, Cheese, Pico (mild salsa), Sour cream, Lettuce', image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&q=80&w=400' },
+          { name: 'Legendary', description: 'White rice, Vegetables, Black beans, Mix protein, Pico (mild salsa), Roasted corns, Cheese, Lettuce', image: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&q=80&w=400' },
+          { name: 'Fajita Salad', description: 'Fajita veg, Pinto, Pico, Corn, Cheese, Lettuce', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=400' }
         ],
         step2: [
           { name: 'Vegetarian Paneer', price: 270 },
@@ -1069,10 +1070,17 @@
           };
         }
         const savedVal = itemSelections[item.id].option;
+        const savedPrice = optionsList.find(o => o.name === savedVal)?.price || 0;
         priceHtml = `
-          <div class="flex flex-col gap-1.5 w-full mt-1">
-            <label class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60">Select Option:</label>
-            <div class="flex flex-wrap gap-2 relative z-10">
+          <details class="w-full mt-2 group/price-details relative z-10">
+            <summary class="flex items-center justify-between cursor-pointer list-none outline-none [&::-webkit-details-marker]:hidden bg-[#ebdccb]/30 border border-rossoNavy/10 hover:border-rossoRed/30 transition-colors px-3 py-2.5 rounded-xl shadow-sm">
+              <div class="flex flex-col">
+                 <span class="text-[9px] uppercase font-bold tracking-wider text-rossoNavy/60 mb-0.5">Selected Option:</span>
+                 <span class="text-xs md:text-sm font-bold text-rossoNavy font-sans">${savedVal} <span class="text-rossoRed ml-1">₹${savedPrice}</span></span>
+              </div>
+              <span class="material-symbols-outlined text-rossoNavy/40 group-open/price-details:rotate-180 transition-transform duration-300">expand_more</span>
+            </summary>
+            <div class="flex flex-wrap gap-2 mt-3 pb-1">
               ${optionsList.map(opt => {
           const isSelected = opt.name === savedVal;
           return `
@@ -1083,7 +1091,7 @@
                 `;
         }).join('')}
             </div>
-          </div>
+          </details>
         `;
       } else {
         priceHtml = `<span class="price-tag text-lg">₹${item.price}</span>`;
@@ -1093,9 +1101,12 @@
       let addOnsHtml = '';
       if (item.addOns && item.addOns.length > 0) {
         addOnsHtml = `
-          <div class="mt-3 pt-3 border-t border-rossoNavy/10 w-full">
-            <p class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60 mb-2">Customizations:</p>
-            <div class="flex flex-wrap gap-2 mt-2">
+          <details class="mt-3 pt-3 border-t border-rossoNavy/10 w-full group/details">
+            <summary class="flex items-center justify-between cursor-pointer list-none outline-none [&::-webkit-details-marker]:hidden">
+              <span class="text-[10px] uppercase font-bold tracking-wider text-rossoNavy/60">Customizations</span>
+              <span class="material-symbols-outlined text-rossoNavy/40 group-open/details:rotate-180 transition-transform duration-300 text-lg">expand_more</span>
+            </summary>
+            <div class="flex flex-wrap gap-2 mt-3 pb-1">
               ${item.addOns.map(add => {
           const addOnId = `${item.id}_addon_${add.name.replace(/\s+/g, '_')}`;
           const isChecked = itemSelections[item.id] && itemSelections[item.id].addons.includes(add.name);
@@ -1108,7 +1119,7 @@
                 `;
         }).join('')}
             </div>
-          </div>
+          </details>
         `;
       }
 
