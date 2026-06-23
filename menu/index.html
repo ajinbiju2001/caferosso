@@ -7,7 +7,7 @@
   <title>Cafe Rosso Origin | Digital Menu & Order</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/webp" href="logo.webp">
 
   <!-- Tailwind CSS v3 CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -151,13 +151,37 @@
 
 <body>
 
+  <!-- Preloader Screen -->
+  <div id="preloader" class="fixed inset-0 bg-[#f4ebe1] z-[9999] flex flex-col items-center justify-center transition-opacity duration-500 ease-in-out">
+    <div class="flex flex-col items-center max-w-xs text-center space-y-6 px-4">
+      <!-- Pulsing Brand Logo -->
+      <div class="relative">
+        <div class="absolute inset-0 rounded-full bg-[#c8102e]/10 animate-ping scale-150 duration-1000"></div>
+        <div class="relative w-24 h-24 rounded-full bg-[#c8102e] flex items-center justify-center shadow-2xl border-4 border-[#f4ebe1]">
+          <div class="text-center text-white font-display text-base font-bold tracking-tighter leading-tight flex flex-col items-center justify-center select-none">
+            <span class="border-b border-white/40 pb-0.5 mb-0.5 tracking-widest text-[9px]">CAFÉ</span>
+            <span class="tracking-[0.15em] text-[11px] font-black font-sans">ROSSO</span>
+          </div>
+        </div>
+      </div>
+      <!-- Loading Text and Custom Spinner -->
+      <div class="flex flex-col items-center space-y-3">
+        <div class="w-7 h-7 border-2 border-[#0c2340]/10 border-t-2 border-t-[#c8102e] rounded-full animate-spin"></div>
+        <div class="space-y-1">
+          <p class="font-serif italic text-base text-[#0c2340] tracking-wide">Cafe Rosso Origin</p>
+          <p class="text-[9px] uppercase font-bold tracking-[0.2em] text-[#0c2340]/50">Preparing your experience...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Header -->
   <header
     class="fixed top-0 left-0 right-0 z-40 sticky-nav text-rossoNavy px-4 md:px-6 py-3 transition-all duration-300">
     <div class="max-w-7xl mx-auto flex justify-between items-center relative w-full">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-rossoNavy/20">
-          <img src="logo.png" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
+          <img src="logo.webp" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
         </div>
         <div>
           <span class="font-display text-sm md:text-base tracking-widest font-bold block leading-none">CAFÉ ROSSO</span>
@@ -255,10 +279,12 @@
           </div>
 
           <!-- Main Premium Food Image Frame -->
-          <div class="relative z-10 w-full h-full rounded-2xl overflow-hidden shadow-2xl border-4 border-rossoPaper">
+          <div class="relative z-10 w-full h-full rounded-2xl overflow-hidden shadow-2xl border-4 border-rossoPaper bg-[#ebdccb]/30">
+            <div class="absolute inset-0 bg-[#ebdccb]/60 animate-pulse"></div>
             <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800"
               alt="Premium Steak Cafe Rosso"
-              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+              class="relative z-10 w-full h-full object-cover transform hover:scale-105 transition-all duration-700 opacity-0"
+              onload="this.classList.remove('opacity-0')">
 
             <!-- Elegant overlay badge -->
             <div
@@ -344,7 +370,7 @@
         <!-- Central Logo -->
         <div class="flex justify-center md:order-none -order-1">
           <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg border border-rossoPaper/10">
-            <img src="logo.png" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
+            <img src="logo.webp" alt="Cafe Rosso Logo" class="h-full w-full object-cover">
           </div>
         </div>
         <!-- Location -->
@@ -452,6 +478,8 @@
 
   <!-- Scripts -->
   <script>
+    const startTime = Date.now();
+
     // Menu database
     const CATEGORIES = [
       { id: 'starters_veg', name: 'Starters Veg', icon: 'veg_vegetarian', isGrid: true },
@@ -756,6 +784,17 @@
       updateCartUI();
       setupDragToScroll();
       setupScrollSpy();
+
+      // Fade out and remove preloader
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, 600 - elapsed);
+        setTimeout(() => {
+          preloader.classList.add('opacity-0', 'pointer-events-none');
+          setTimeout(() => preloader.remove(), 500);
+        }, remaining);
+      }
     }
 
     // Render category selectors
@@ -961,8 +1000,9 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   ${byoData.step1.map(base => `
                     <div class="bg-white/70 p-4 rounded-lg border border-rossoNavy/5 hover:border-rossoRed/30 transition-all duration-300 flex gap-4">
-                      <div class="w-16 h-16 rounded-md overflow-hidden flex-shrink-0 border border-rossoNavy/5">
-                        <img src="${base.image}" alt="${base.name}" class="w-full h-full object-cover">
+                      <div class="w-16 h-16 rounded-md overflow-hidden flex-shrink-0 border border-rossoNavy/5 relative bg-[#ebdccb]/30">
+                        <div class="absolute inset-0 bg-[#ebdccb]/60 animate-pulse"></div>
+                        <img src="${base.image}" alt="${base.name}" class="relative z-10 w-full h-full object-cover transition-opacity duration-500 opacity-0" onload="this.classList.remove('opacity-0')">
                       </div>
                       <div>
                         <h5 class="font-display text-sm font-bold text-rossoNavy leading-tight">${base.name}</h5>
@@ -1189,8 +1229,9 @@
           <div class="bg-[#ebdccb]/15 rounded-xl p-4 flex flex-col justify-between border border-rossoNavy/10 group hover:border-rossoRed/30 transition-all duration-300 snap-start flex-grow">
             <div>
               <div class="flex gap-4 mb-3">
-                <div class="${imgContainerClasses}">
-                  <img id="img-${item.id}" alt="${item.name}" class="w-full h-full ${item.zoomOut ? 'object-contain p-1' : 'object-cover'} transition-transform duration-500 group-hover:scale-105" src="${displayImage}">
+                <div class="${imgContainerClasses} relative overflow-hidden bg-[#ebdccb]/30">
+                  <div class="absolute inset-0 bg-[#ebdccb]/60 animate-pulse"></div>
+                  <img id="img-${item.id}" alt="${item.name}" class="relative z-10 w-full h-full ${item.zoomOut ? 'object-contain p-1' : 'object-cover'} transition-all duration-500 group-hover:scale-105 opacity-0" src="${displayImage}" onload="this.classList.remove('opacity-0')">
                 </div>
                 <div class="flex-grow flex flex-col justify-between">
                   <div>
@@ -1353,7 +1394,7 @@
       if (selectedOption) displayName += ` (${selectedOption})`;
       if (selectedAddOns.length > 0) displayName += ` + ${selectedAddOns.join(', ')}`;
 
-      let displayImage = item.image || 'logo.png';
+      let displayImage = item.image || 'logo.webp';
       if (item.isPricedOptions && selectedOption) {
         const matchedOpt = item.priceOptions.find(o => o.name === selectedOption);
         if (matchedOpt && matchedOpt.image) {
@@ -1477,7 +1518,7 @@
           return `
             <div class="flex items-center justify-between border-b pb-3 border-rossoNavy/10">
               <div class="w-12 h-12 rounded-md overflow-hidden flex-shrink-0 border border-rossoNavy/10 mr-3">
-                <img src="${item.image || 'logo.png'}" alt="${item.name}" class="w-full h-full object-cover">
+                <img src="${item.image || 'logo.webp'}" alt="${item.name}" class="w-full h-full object-cover">
               </div>
               <div class="flex-grow pr-2">
                 <h5 class="font-semibold text-sm text-rossoNavy leading-tight">${item.name}</h5>
@@ -1581,8 +1622,17 @@
       }
     });
 
-    // Run init
-    window.onload = init;
+    // Run init on DOMContentLoaded to make the page interactive instantly
+    document.addEventListener('DOMContentLoaded', init);
+
+    // Safety backup to remove preloader if loading takes too long
+    setTimeout(() => {
+      const preloader = document.getElementById('preloader');
+      if (preloader && !preloader.classList.contains('opacity-0')) {
+        preloader.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => preloader.remove(), 500);
+      }
+    }, 3500);
   </script>
 </body>
 
